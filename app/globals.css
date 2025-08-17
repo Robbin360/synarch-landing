@@ -27,3 +27,16 @@ body {
 .font-serif {
   font-family: var(--font-playfair);
 } 
+
+/* Page transitions */
+.page-enter {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(8px);
+}
+.page-enter-active {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0px);
+  transition: opacity 400ms ease, filter 400ms ease, transform 400ms ease;
+}

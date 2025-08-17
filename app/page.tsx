@@ -4,15 +4,22 @@ import Thesis from '@/components/Thesis'
 import Entities from '@/components/Entities'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import Reveal from '@/components/Reveal'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Header />
       <Hero />
-      <Thesis />
-      <Entities />
-      <Contact />
+      <Reveal>
+        <Thesis />
+      </Reveal>
+      <Reveal>
+        <Entities />
+      </Reveal>
+      <Reveal>
+        <Contact />
+      </Reveal>
       <Footer />
     </main>
   )
