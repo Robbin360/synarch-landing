@@ -1,0 +1,31 @@
+# Dependencies
+node_modules
+.next
+.turbo
+.vercel
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env
+.env*
+!.env.example
+
+# Editors
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist
+out
+
+# Misc
+*.local
+
