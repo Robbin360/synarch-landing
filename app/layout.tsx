@@ -4,6 +4,7 @@ import './globals.css'
 import Background3D from '@/components/Background3D'
 import ClientLayout from '@/components/ClientLayout'
 import ScrollObserver from '@/components/ScrollObserver'
+import Header from '@/components/Header'
 
 // Font configurations
 const inter = Inter({ 
@@ -39,6 +40,7 @@ export default function RootLayout({
         <Background3D />
         <div className="relative z-10">
           <ScrollObserver />
+          <Header />
           <ClientLayout>{children}</ClientLayout>
         </div>
       </body>
