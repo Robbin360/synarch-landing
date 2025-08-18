@@ -19,7 +19,10 @@ A minimalist, brutalist web design for SYNARCH, a private deep-tech holding comp
 ## Features
 
 - Fully responsive design
-- Smooth scroll navigation
+- Real multi-page navigation (Home, Thesis, Entities, Contact, Privacy, Terms)
+- Animated 3D background with Three.js (subtle particles, mouse interactivity)
+- Framer Motion page transitions and scroll reveal animations
+- Advanced button animations (glow, shine, ripple, loading particles)
 - Optimized fonts with next/font
 - Accessibility-focused
 - Performance-optimized
@@ -28,37 +31,50 @@ A minimalist, brutalist web design for SYNARCH, a private deep-tech holding comp
 ## Getting Started
 
 1. Install dependencies:
-   `ash
-   npm install
-   ``n
+```bash
+npm install
+```
 2. Run the development server:
-   `ash
-   npm run dev
-   ``n
+```bash
+npm run dev
+```
 3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
-``n+-- app/
-¦   +-- layout.tsx          # Root layout with fonts and metadata
-¦   +-- page.tsx            # Main page component
-¦   +-- globals.css         # Global styles and Tailwind imports
-+-- components/
-¦   +-- Header.tsx          # Navigation header
-¦   +-- Hero.tsx            # Main hero section
-¦   +-- Thesis.tsx          # Company thesis section
-¦   +-- Entities.tsx        # Operating entities (NOEMA & FULCRUM)
-¦   +-- Contact.tsx         # Contact information
-¦   +-- Footer.tsx          # Footer with navigation
-+-- package.json
-+-- tsconfig.json
-+-- tailwind.config.ts
-+-- postcss.config.js
-+-- next.config.js
-``n
+```text
+./app/
+  layout.tsx           # Root layout, fonts, page transitions and 3D background
+  page.tsx             # Home page
+  globals.css          # Global styles and Tailwind imports
+  thesis/page.tsx      # Thesis page
+  entities/page.tsx    # Entities page
+  contact/page.tsx     # Contact page with strategic inquiry form
+  privacy/page.tsx     # Privacy Policy
+  terms/page.tsx       # Terms & Conditions
+
+./components/
+  Header.tsx           # Navigation header
+  Footer.tsx           # Footer with legal links
+  Hero.tsx             # Main hero section
+  Entities.tsx         # Home entities section
+  Thesis.tsx           # Home thesis section
+  Contact.tsx          # Home contact section
+  AnimatedButton.tsx   # Advanced animated button component
+  Background3D.tsx     # Three.js background particles
+  ClientLayout.tsx     # Framer Motion page transitions
+  Reveal.tsx           # Scroll reveal wrapper
+  TypingHeading.tsx    # Typing effect heading
+  QuickNavButtons.tsx  # Quick navigation button group
+
+package.json
+tsconfig.json
+tailwind.config.ts
+postcss.config.js
+```
 ## Build and Deploy
 
-`ash
+```bash
 # Build for production
 npm run build
 
@@ -67,7 +83,7 @@ npm start
 
 # Lint code
 npm run lint
-``n
+```
 ## Brand Identity
 
 - **Company**: SYNARCH
