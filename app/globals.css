@@ -40,3 +40,85 @@ body {
   transform: translateY(0px);
   transition: opacity 400ms ease, filter 400ms ease, transform 400ms ease;
 }
+
+/* Advanced button animations */
+.synarch-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.synarch-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.synarch-button:hover::before {
+  left: 100%;
+}
+
+.synarch-button:hover {
+  box-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.synarch-button:active {
+  transform: scale(0.98);
+}
+
+.synarch-button.clicked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+  animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+  to {
+    width: 300px;
+    height: 300px;
+    margin-left: -150px;
+    margin-top: -150px;
+    opacity: 0;
+  }
+}
+
+/* Scroll animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-up.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive refinements */
+@media (max-width: 768px) {
+  .thesis-page, .entities-page, .contact-page {
+    padding: 1rem;
+  }
+  .pillar-grid, .focus-grid, .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .synarch-form .form-row {
+    flex-direction: column;
+  }
+  .synarch-button {
+    transition: all 0.2s ease;
+  }
+}

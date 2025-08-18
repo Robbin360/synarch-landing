@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import Background3D from '@/components/Background3D'
 import ClientLayout from '@/components/ClientLayout'
+import ScrollObserver from '@/components/ScrollObserver'
 
 // Font configurations
 const inter = Inter({ 
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-[#111111] text-white antialiased`}>
         <Background3D />
         <div className="relative z-10">
+          <ScrollObserver />
           <ClientLayout>{children}</ClientLayout>
         </div>
       </body>

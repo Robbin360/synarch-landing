@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 type AnimatedButtonProps = {
   children: React.ReactNode
@@ -21,6 +21,7 @@ export default function AnimatedButton({
   loading = false,
 }: AnimatedButtonProps) {
   const [isPressed, setIsPressed] = useState(false)
+  const [clicked, setClicked] = useState(false)
   const [pulseKey, setPulseKey] = useState(0)
 
   const base =
@@ -55,9 +56,11 @@ export default function AnimatedButton({
       onMouseLeave={() => setIsPressed(false)}
       onClick={() => {
         setPulseKey((k) => k + 1)
+        setClicked(true)
+        setTimeout(() => setClicked(false), 450)
         onClick?.()
       }}
-      className={`${base} ${palette} ${className}`}
+      className={`${base} ${palette} synarch-button ${clicked ? 'clicked' : ''} ${className}`}
       aria-busy={loading || undefined}
     >
       {/* Glow layers */}

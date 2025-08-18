@@ -3,68 +3,59 @@ import Reveal from '@/components/Reveal'
 
 export default function ThesisPage() {
   return (
-    <main className="min-h-screen pt-24 px-6">
-      <section className="max-w-5xl mx-auto text-center mb-20">
+    <main className="min-h-screen pt-24 px-6 thesis-page">
+      <section className="max-w-5xl mx-auto text-center mb-20 hero fade-in-up">
         <h1 className="font-serif text-4xl md:text-6xl font-medium mb-6">The Synarch Thesis: Engineering Inevitability</h1>
-        <p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto">
-          Our thesis is not about prediction. It is about constructing conditions where outcomes become inescapable.
-        </p>
-        <div className="mt-10 flex items-center justify-center gap-4">
-          <AnimatedButton href="#pillars">Explore Our Manifesto</AnimatedButton>
+        <p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto">Beyond prediction lies creation. Beyond creation lies inevitability.</p>
+      </section>
+
+      <section className="max-w-6xl mx-auto mb-24 pillars fade-in-up">
+        <h2 className="font-serif text-3xl md:text-4xl font-medium mb-8 text-center">The Fundamental Pillars</h2>
+        <div className="grid md:grid-cols-3 gap-10 pillar-grid">
+          <div className="bg-white/5 rounded-xl p-6 border border-white/10 pillar">
+            <h3 className="font-serif text-2xl mb-3">Constraint Identification</h3>
+            <p className="text-white/80">We identify the fundamental constraints that shape reality and limit possibility. These constraints exist at multiple levels: physical laws, technological limitations, economic structures, and cognitive biases.</p>
+          </div>
+          <div className="bg-white/5 rounded-xl p-6 border border-white/10 pillar">
+            <h3 className="font-serif text-2xl mb-3">Systematic Removal</h3>
+            <p className="text-white/80">Through methodical analysis and strategic intervention, we systematically remove these constraints. This isn't about breaking rules—it's about rewriting the underlying architecture of possibility.</p>
+          </div>
+          <div className="bg-white/5 rounded-xl p-6 border border-white/10 pillar">
+            <h3 className="font-serif text-2xl mb-3">Outcome Architecture</h3>
+            <p className="text-white/80">We create the conditions where certain outcomes become inevitable. By controlling the foundational structures, we architect the future rather than merely predict it.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto mb-24 difference fade-in-up">
+        <h2 className="font-serif text-3xl md:text-4xl font-medium mb-8 text-center">The Synarch Difference</h2>
+        <div className="grid md:grid-cols-2 gap-10 comparison">
+          <div className="bg-white/0 rounded-xl p-6 border border-white/10 traditional">
+            <h3 className="text-xl font-medium mb-3">Traditional Approach</h3>
+            <ul className="text-white/70 list-disc list-inside space-y-2">
+              <li>Extrapolates from existing paradigms</li>
+              <li>Predicts based on current trends</li>
+              <li>Reacts to market forces</li>
+              <li>Limited by conventional thinking</li>
+            </ul>
+          </div>
+          <div className="bg-white/0 rounded-xl p-6 border border-white/10 synarch">
+            <h3 className="text-xl font-medium mb-3">Synarch Methodology</h3>
+            <ul className="text-white/70 list-disc list-inside space-y-2">
+              <li>Identifies fundamental constraints</li>
+              <li>Creates conditions for inevitability</li>
+              <li>Shapes market architecture</li>
+              <li>Transcends paradigm limitations</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-5xl mx-auto text-center cta-section fade-in-up">
+        <div className="flex items-center justify-center gap-4 cta-buttons">
+          <AnimatedButton href="#pillars" variant="primary">Explore Our Manifesto</AnimatedButton>
           <AnimatedButton href="/entities" variant="secondary">Discover Our Entities</AnimatedButton>
           <AnimatedButton href="/contact" variant="secondary">Engage With Us</AnimatedButton>
-        </div>
-      </section>
-
-      <section id="pillars" className="max-w-6xl mx-auto mb-24">
-        <Reveal>
-          <h2 className="font-serif text-3xl md:text-4xl font-medium mb-8 text-center">Fundamental Pillars</h2>
-        </Reveal>
-        <div className="grid md:grid-cols-3 gap-10">
-          <Reveal>
-            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-              <h3 className="font-serif text-2xl mb-3">Constraint Removal</h3>
-              <p className="text-white/80">We identify the structural constraints that limit progress and remove them methodically.</p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-              <h3 className="font-serif text-2xl mb-3">Systems Engineering</h3>
-              <p className="text-white/80">We design resilient architectures that unlock inevitabilities across domains.</p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-              <h3 className="font-serif text-2xl mb-3">Purposeful Deployment</h3>
-              <p className="text-white/80">We deploy capital and expertise to make paradigm shifts operational and durable.</p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto mb-24">
-        <Reveal>
-          <h2 className="font-serif text-3xl md:text-4xl font-medium mb-8 text-center">The Synarch Difference</h2>
-        </Reveal>
-        <div className="grid md:grid-cols-3 gap-10">
-          <Reveal>
-            <div className="p-6">
-              <h3 className="text-xl font-medium mb-3">Not Forecasting — Engineering</h3>
-              <p className="text-white/80">We favor first-principles construction over predictive speculation.</p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="p-6">
-              <h3 className="text-xl font-medium mb-3">Institutional Knowledge</h3>
-              <p className="text-white/80">Integrated operating and investment expertise aligned to execution.</p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="p-6">
-              <h3 className="text-xl font-medium mb-3">Silent Power</h3>
-              <p className="text-white/80">We optimize for results, not noise, ensuring focused progress.</p>
-            </div>
-          </Reveal>
         </div>
       </section>
     </main>

@@ -11,6 +11,7 @@ import * as THREE from 'three'
 export default function Background3D() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mouseRef = useRef({ x: 0, y: 0 })
+  const hoverIntensityRef = useRef(0)
 
   useEffect(() => {
     const container = containerRef.current
@@ -88,8 +89,14 @@ export default function Background3D() {
       const y = -(e.clientY / window.innerHeight) * 2 + 1
       mouseRef.current.x = x
       mouseRef.current.y = y
+      hoverIntensityRef.current = Math.min(1, hoverIntensityRef.current + 0.08)
     }
     window.addEventListener('mousemove', onMouseMove)
+
+    const onMouseLeave = () => {
+      hoverIntensityRef.current = 0
+    }
+    window.addEventListener('mouseleave', onMouseLeave)
 
     let frameId: number
     const animate = () => {
@@ -97,11 +104,17 @@ export default function Background3D() {
       group.rotation.y += 0.0008
       group.rotation.x += 0.0004
 
-      // Mouse parallax influence
-      const targetRotX = mouseRef.current.y * 0.08
-      const targetRotY = mouseRef.current.x * 0.12
+      // Mouse parallax influence + intensity easing
+      const targetRotX = mouseRef.current.y * 0.08 * (0.5 + hoverIntensityRef.current * 0.5)
+      const targetRotY = mouseRef.current.x * 0.12 * (0.5 + hoverIntensityRef.current * 0.5)
       group.rotation.x += (targetRotX - group.rotation.x) * 0.02
       group.rotation.y += (targetRotY - group.rotation.y) * 0.02
+
+      // Subtle opacity/size modulation based on hover intensity
+      const mat = material as THREE.PointsMaterial
+      const baseSize = 0.6
+      const sizeTarget = baseSize * (1 + hoverIntensityRef.current * 0.25)
+      mat.size += (sizeTarget - mat.size) * 0.05
 
       renderer.render(scene, camera)
       frameId = requestAnimationFrame(animate)
@@ -112,6 +125,7 @@ export default function Background3D() {
       cancelAnimationFrame(frameId)
       window.removeEventListener('resize', onResize)
       window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('mouseleave', onMouseLeave)
       geometry.dispose()
       material.dispose()
       renderer.dispose()
