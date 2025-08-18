@@ -20,20 +20,22 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="font-serif text-2xl font-medium tracking-wide">
-            SYNARCH
+            <Link href="/" className="synarch-button px-2 py-1 rounded">
+              SYNARCH
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Primary">
-            <Link href="/thesis" className="text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide">
+            <Link href="/thesis" className="synarch-button text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide px-3 py-1 rounded">
               Thesis
             </Link>
             <div className="text-white/40">|</div>
-            <Link href="/entities" className="text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide">
+            <Link href="/entities" className="synarch-button text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide px-3 py-1 rounded">
               Entities
             </Link>
             <div className="text-white/40">|</div>
-            <Link href="/contact" className="text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide">
+            <Link href="/contact" className="synarch-button text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide px-3 py-1 rounded">
               Contact
             </Link>
           </nav>
@@ -56,13 +58,13 @@ export default function Header() {
         {isMenuOpen && (
           <nav id="mobile-menu" className="md:hidden mt-4 pb-4 border-t border-white/10 pt-4" role="navigation">
             <div className="flex flex-col space-y-4">
-              <Link href="/thesis" className="text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide">
+              <Link href="/thesis" className="synarch-button text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide px-3 py-1 rounded">
                 Thesis
               </Link>
-              <Link href="/entities" className="text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide">
+              <Link href="/entities" className="synarch-button text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide px-3 py-1 rounded">
                 Entities
               </Link>
-              <Link href="/contact" className="text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide">
+              <Link href="/contact" className="synarch-button text-white/80 hover:text-white transition-colors duration-200 text-sm tracking-wide px-3 py-1 rounded">
                 Contact
               </Link>
             </div>

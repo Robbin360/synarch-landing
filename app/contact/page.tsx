@@ -3,6 +3,7 @@
 import AnimatedButton from '@/components/AnimatedButton'
 import Reveal from '@/components/Reveal'
 import { useState } from 'react'
+import QuickNavButtons from '@/components/QuickNavButtons'
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false)
@@ -111,6 +112,9 @@ export default function ContactPage() {
           <AnimatedButton href="#" variant="secondary">Schedule Strategic Consultation</AnimatedButton>
         </div>
       </section>
+      <div className="py-16 flex items-center justify-center">
+        <QuickNavButtons />
+      </div>
     </main>
   )
 }

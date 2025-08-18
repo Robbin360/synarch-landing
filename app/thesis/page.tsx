@@ -1,5 +1,6 @@
 import AnimatedButton from '@/components/AnimatedButton'
 import Reveal from '@/components/Reveal'
+import QuickNavButtons from '@/components/QuickNavButtons'
 
 export default function ThesisPage() {
   return (
@@ -58,6 +59,9 @@ export default function ThesisPage() {
           <AnimatedButton href="/contact" variant="secondary">Engage With Us</AnimatedButton>
         </div>
       </section>
+      <div className="py-16 flex items-center justify-center">
+        <QuickNavButtons />
+      </div>
     </main>
   )
 }

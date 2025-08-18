@@ -5,6 +5,7 @@ import Entities from '@/components/Entities'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import Reveal from '@/components/Reveal'
+import QuickNavButtons from '@/components/QuickNavButtons'
 
 export default function Home() {
   return (
@@ -20,6 +21,9 @@ export default function Home() {
       <Reveal>
         <Contact />
       </Reveal>
+      <div className="py-16 flex items-center justify-center">
+        <QuickNavButtons />
+      </div>
       <Footer />
     </main>
   )

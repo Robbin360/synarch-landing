@@ -1,5 +1,6 @@
 import AnimatedButton from '@/components/AnimatedButton'
 import Reveal from '@/components/Reveal'
+import QuickNavButtons from '@/components/QuickNavButtons'
 
 export default function EntitiesPage() {
   return (
@@ -104,6 +105,9 @@ export default function EntitiesPage() {
           <AnimatedButton href="/contact" variant="secondary">Understand Our Approach</AnimatedButton>
         </div>
       </section>
+      <div className="py-16 flex items-center justify-center">
+        <QuickNavButtons />
+      </div>
     </main>
   )
 }
