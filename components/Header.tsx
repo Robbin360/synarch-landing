@@ -16,7 +16,9 @@ export default function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#111111]/95 backdrop-blur-sm border-b border-white/10">
+    // reduce header opacity and slightly lower z-index to avoid obscuring
+    // page content during client-side navigation and ensure text remains visible
+    <header className="fixed top-0 left-0 right-0 z-40 bg-[#111111]/70 backdrop-blur-sm border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
