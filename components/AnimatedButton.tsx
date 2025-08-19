@@ -1,12 +1,12 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 
 type AnimatedButtonProps = {
   children: React.ReactNode
-  onClick?: () => void
+  onClick?: (e?: React.MouseEvent) => void
   href?: string | URL
   variant?: 'primary' | 'secondary'
   className?: string
@@ -48,6 +48,13 @@ export default function AnimatedButton({
     </motion.span>
   )
 
+  const handleClick = (e?: React.MouseEvent) => {
+    setPulseKey((k) => k + 1)
+    setClicked(true)
+    setTimeout(() => setClicked(false), 450)
+    onClick?.(e)
+  }
+
   const ButtonCore = (
     <motion.button
       type="button"
@@ -55,12 +62,7 @@ export default function AnimatedButton({
       onMouseDown={() => setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}
       onMouseLeave={() => setIsPressed(false)}
-      onClick={() => {
-        setPulseKey((k) => k + 1)
-        setClicked(true)
-        setTimeout(() => setClicked(false), 450)
-        onClick?.()
-      }}
+      onClick={handleClick}
       className={`${base} ${palette} synarch-button ${clicked ? 'clicked' : ''} ${className}`}
       aria-busy={loading || undefined}
     >
@@ -74,6 +76,7 @@ export default function AnimatedButton({
             'radial-gradient(40% 40% at 50% 50%, rgba(146, 97, 255, 0.25) 0%, rgba(146, 97, 255, 0.0) 100%)',
         }}
       />
+
       <motion.span
         className="absolute inset-0 rounded-lg"
         animate={{
@@ -87,6 +90,7 @@ export default function AnimatedButton({
         }}
         transition={{ duration: loading ? 1.2 : 0.2, repeat: loading ? Infinity : 0 }}
       />
+
       {/* Click pulse */}
       <motion.span
         key={pulseKey}
@@ -99,6 +103,7 @@ export default function AnimatedButton({
             'radial-gradient(35% 35% at 50% 50%, rgba(146, 97, 255, 0.35) 0%, rgba(146, 97, 255, 0.0) 100%)',
         }}
       />
+
       {/* Loading orbiting particles */}
       {loading && (
         <motion.span
@@ -115,6 +120,7 @@ export default function AnimatedButton({
             style={{ background: 'linear-gradient(180deg, #7e6bff, #6aa6ff)' }} />
         </motion.span>
       )}
+
       {content}
     </motion.button>
   )
@@ -128,12 +134,7 @@ export default function AnimatedButton({
           onMouseDown={() => setIsPressed(true)}
           onMouseUp={() => setIsPressed(false)}
           onMouseLeave={() => setIsPressed(false)}
-          onClick={e => {
-            setPulseKey((k) => k + 1)
-            setClicked(true)
-            setTimeout(() => setClicked(false), 450)
-            onClick?.()
-          }}
+          onClick={handleClick}
           className={`${base} ${palette} synarch-button ${clicked ? 'clicked' : ''} ${className}`}
           aria-busy={loading || undefined}
           role="button"
@@ -148,6 +149,7 @@ export default function AnimatedButton({
                 'radial-gradient(40% 40% at 50% 50%, rgba(146, 97, 255, 0.25) 0%, rgba(146, 97, 255, 0.0) 100%)',
             }}
           />
+
           <motion.span
             className="absolute inset-0 rounded-lg"
             animate={{
@@ -161,6 +163,7 @@ export default function AnimatedButton({
             }}
             transition={{ duration: loading ? 1.2 : 0.2, repeat: loading ? Infinity : 0 }}
           />
+
           <motion.span
             key={pulseKey}
             className="absolute inset-0 rounded-lg"
@@ -172,6 +175,7 @@ export default function AnimatedButton({
                 'radial-gradient(35% 35% at 50% 50%, rgba(146, 97, 255, 0.35) 0%, rgba(146, 97, 255, 0.0) 100%)',
             }}
           />
+
           {loading && (
             <motion.span
               className="pointer-events-none absolute inset-0"
@@ -187,6 +191,7 @@ export default function AnimatedButton({
                 style={{ background: 'linear-gradient(180deg, #7e6bff, #6aa6ff)' }} />
             </motion.span>
           )}
+
           {content}
         </motion.a>
       </Link>
