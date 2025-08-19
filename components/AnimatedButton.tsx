@@ -9,6 +9,8 @@ type AnimatedButtonProps = {
   onClick?: (e?: React.MouseEvent) => void
   href?: string | URL
   variant?: 'primary' | 'secondary'
+  // allow button type when rendering a native <button>
+  type?: 'button' | 'submit' | 'reset'
   className?: string
   loading?: boolean
 }
@@ -20,6 +22,7 @@ export default function AnimatedButton({
   variant = 'primary',
   className = '',
   loading = false,
+  type = 'button',
 }: AnimatedButtonProps) {
   const [isPressed, setIsPressed] = useState(false)
   const [clicked, setClicked] = useState(false)
@@ -57,7 +60,7 @@ export default function AnimatedButton({
 
   const ButtonCore = (
     <motion.button
-      type="button"
+  type={type}
       whileTap={{ scale: 0.98 }}
       onMouseDown={() => setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}

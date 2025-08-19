@@ -175,7 +175,7 @@ export default function ContactPage() {
           </div>
 
           <div className="form-actions md:col-span-2 flex flex-wrap gap-3 items-center">
-            <AnimatedButton loading={loading} onClick={() => {}}>{/* disabled visual solo */}Submit Inquiry</AnimatedButton>
+            <AnimatedButton loading={loading} type="submit">{/* disabled visual solo */}Submit Inquiry</AnimatedButton>
             <a href="/capability-brief.pdf" download>
               <AnimatedButton variant="secondary">Download Capability Brief</AnimatedButton>
             </a>
