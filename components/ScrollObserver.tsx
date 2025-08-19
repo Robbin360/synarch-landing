@@ -1,9 +1,15 @@
 'use client'
 
 import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function ScrollObserver() {
+  const pathname = usePathname()
+
   useEffect(() => {
+    // Re-create the observer whenever the pathname changes so newly-mounted
+    // route content with the `.fade-in-up` class is observed and can receive
+    // the `animate-in` class when it intersects the viewport.
     const options = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -17,7 +23,7 @@ export default function ScrollObserver() {
     elements.forEach((el) => observer.observe(el))
 
     return () => observer.disconnect()
-  }, [])
+  }, [pathname])
 
   return null
 }

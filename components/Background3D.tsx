@@ -138,10 +138,12 @@ export default function Background3D() {
       ref={containerRef}
       aria-hidden
       style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 0,
-        pointerEvents: 'none',
+  position: 'fixed',
+  inset: 0,
+  zIndex: 0 as number,
+  pointerEvents: 'none',
+  // ensure it's strictly behind the main content
+  willChange: 'transform',
       }}
     />
   )

@@ -24,6 +24,11 @@ body {
   line-height: 1.6;
 }
 
+/* Prevent fixed header from covering anchored content */
+html {
+  scroll-padding-top: 84px; /* approx header height */
+}
+
 .font-serif {
   font-family: var(--font-playfair);
 } 
