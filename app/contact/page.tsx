@@ -1,7 +1,6 @@
 'use client'
 
-import AnimatedButton from '@/components/AnimatedButton'
-// import Reveal from '@/components/Reveal'
+import AnimatedButton from '@/components/AnimatedButton'// import Reveal from '@/components/Reveal'
 import { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
 import QuickNavButtons from '@/components/QuickNavButtons'
@@ -176,13 +175,17 @@ export default function ContactPage() {
           </div>
 
           <div className="form-actions md:col-span-2 flex flex-wrap gap-3 items-center">
-            <AnimatedButton loading={loading} disabled={loading || Object.keys(errors).length > 0}>Submit Inquiry</AnimatedButton>
-            <AnimatedButton href="/capability-brief.pdf" variant="secondary" onClick={e => {}} download>Download Capability Brief</AnimatedButton>
-            <AnimatedButton href="#schedule" variant="secondary" onClick={e => {
-              e.preventDefault()
-              const el = document.getElementById('schedule-section')
-              if (el) el.scrollIntoView({ behavior: 'smooth' })
-            }}>Schedule Strategic Consultation</AnimatedButton>
+            <AnimatedButton loading={loading} onClick={() => {}}>{/* disabled visual solo */}Submit Inquiry</AnimatedButton>
+            <a href="/capability-brief.pdf" download>
+              <AnimatedButton variant="secondary">Download Capability Brief</AnimatedButton>
+            </a>
+            <AnimatedButton
+              variant="secondary"
+              onClick={() => {
+                const el = document.getElementById('schedule-section')
+                if (el) el.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >Schedule Strategic Consultation</AnimatedButton>
           </div>
       {success && (
         <div className="max-w-4xl mx-auto mt-6 text-center">
@@ -204,12 +207,16 @@ export default function ContactPage() {
 
       <section id="schedule-section" className="max-w-4xl mx-auto additional-cta fade-in-up mt-8">
         <div className="cta-buttons flex items-center gap-3">
-          <AnimatedButton href="/capability-brief.pdf" variant="secondary" download>Download Capability Brief</AnimatedButton>
-          <AnimatedButton href="#schedule" variant="secondary" onClick={e => {
-            e.preventDefault()
-            const el = document.getElementById('schedule-section')
-            if (el) el.scrollIntoView({ behavior: 'smooth' })
-          }}>Schedule Strategic Consultation</AnimatedButton>
+          <a href="/capability-brief.pdf" download>
+            <AnimatedButton variant="secondary">Download Capability Brief</AnimatedButton>
+          </a>
+          <AnimatedButton
+            variant="secondary"
+            onClick={() => {
+              const el = document.getElementById('schedule-section')
+              if (el) el.scrollIntoView({ behavior: 'smooth' })
+            }}
+          >Schedule Strategic Consultation</AnimatedButton>
         </div>
         <div className="mt-8 bg-white/5 rounded-xl p-6 border border-white/10 text-center">
           <h3 className="font-serif text-xl mb-2">Strategic Consultation</h3>
