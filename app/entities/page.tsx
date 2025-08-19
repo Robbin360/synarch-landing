@@ -100,9 +100,9 @@ export default function EntitiesPage() {
 
       <section className="max-w-5xl mx-auto text-center cta-section fade-in-up">
         <div className="flex items-center justify-center gap-4 cta-buttons">
-          <AnimatedButton href="/contact" variant="primary">Partner With FULCRUM</AnimatedButton>
-          <AnimatedButton href="/contact" variant="secondary">Collaborate With NOEMA</AnimatedButton>
-          <AnimatedButton href="/contact" variant="secondary">Understand Our Approach</AnimatedButton>
+          <AnimatedButton href="/contact?subject=strategic-partnership" variant="primary">Partner With FULCRUM</AnimatedButton>
+          <AnimatedButton href="/contact?subject=research-collaboration" variant="secondary">Collaborate With NOEMA</AnimatedButton>
+          <AnimatedButton href="/thesis" variant="secondary">Understand Our Approach</AnimatedButton>
         </div>
       </section>
       <div className="py-16 flex items-center justify-center">

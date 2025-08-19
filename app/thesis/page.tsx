@@ -54,7 +54,7 @@ export default function ThesisPage() {
 
       <section className="max-w-5xl mx-auto text-center cta-section fade-in-up">
         <div className="flex items-center justify-center gap-4 cta-buttons">
-          <AnimatedButton href="#pillars" variant="primary">Explore Our Manifesto</AnimatedButton>
+          <AnimatedButton href="/manifesto" variant="primary">Explore Our Manifesto</AnimatedButton>
           <AnimatedButton href="/entities" variant="secondary">Discover Our Entities</AnimatedButton>
           <AnimatedButton href="/contact" variant="secondary">Engage With Us</AnimatedButton>
         </div>
