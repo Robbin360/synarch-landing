@@ -1,12 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*
+  The following @tailwind directives require Tailwind CSS to process this file.
+  Make sure your build tool (e.g., Next.js, PostCSS, Vite) is configured to use Tailwind.
+*/
+/* @tailwind directives removed because Tailwind CSS is not configured to process this file. */
+/* If you set up Tailwind, you can restore these lines. */
 
+/* Root variables */
 :root {
   --font-inter: 'Inter', sans-serif;
   --font-playfair: 'Playfair Display', serif;
 }
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -15,6 +18,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Prevent fixed header from covering anchored content */
+  scroll-padding-top: 84px; /* approx header height */
 }
 
 body {
@@ -22,11 +27,6 @@ body {
   background-color: #111111;
   color: #FFFFFF;
   line-height: 1.6;
-}
-
-/* Prevent fixed header from covering anchored content */
-html {
-  scroll-padding-top: 84px; /* approx header height */
 }
 
 .font-serif {
@@ -75,6 +75,14 @@ html {
 
 .synarch-button:active {
   transform: scale(0.98);
+}
+
+/* Accessible focus state for keyboard users */
+.synarch-button:focus,
+.synarch-button:focus-visible {
+  outline: 3px solid rgba(130,120,255,0.28);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(130,120,255,0.08);
 }
 
 .synarch-button.clicked::after {
@@ -126,4 +134,16 @@ html {
   .synarch-button {
     transition: all 0.2s ease;
   }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .synarch-button,
+  .fade-in-up,
+  .page-enter,
+  .page-enter-active {
+    transition: none !important;
+    animation: none !important;
+  }
+  /* Reduce framer-motion heavy animations via CSS fallback; components should also check this preference */
 }
