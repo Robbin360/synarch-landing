@@ -21,7 +21,7 @@ export class LuxuryPerformanceMonitor {
         if (callback) callback(this.fps)
         
         // Performance warnings for luxury experience
-        if (this.fps < 45) {
+        if (this.fps < 45 && process.env.NODE_ENV === 'development') {
           console.warn('Performance Warning: FPS below luxury threshold:', this.fps)
         }
       }

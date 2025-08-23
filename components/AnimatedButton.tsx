@@ -66,7 +66,7 @@ export default function AnimatedButton({
   )
 
   const handleClick = (e?: React.MouseEvent) => {
-    setPulseKey((k) => k + 1)
+    setPulseKey((k: number) => k + 1)
     setClicked(true)
     setTimeout(() => setClicked(false), 600)
     onClick?.(e)
@@ -155,7 +155,7 @@ export default function AnimatedButton({
           onMouseUp={() => setIsPressed(false)}
           onMouseLeave={() => setIsPressed(false)}
           onClick={handleClick}
-          className={`${base} ${palette} synarch-button ${clicked ? 'clicked' : ''} ${className}`}
+          className={`${base} ${variantStyles[variant]} synarch-button ${clicked ? 'clicked' : ''} ${className}`}
           aria-busy={loading || undefined}
           role="link"
           aria-label={typeof children === 'string' ? children : undefined}

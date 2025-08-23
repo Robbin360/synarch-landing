@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Suspense } from 'react'
+import ErrorBoundary from './ErrorBoundary'
 
 // Types for our enhanced background system
 interface RenderEngine {
@@ -134,7 +135,7 @@ function ParticleSystem({ engine }: { engine: RenderEngine }) {
   }, [])
 
   // Physics simulation
-  useFrame((state, delta) => {
+  useFrame((state: any, delta: number) => {
     if (!meshRef.current || !engine.capabilities.physics) return
 
     timeRef.current += delta
@@ -143,7 +144,7 @@ function ParticleSystem({ engine }: { engine: RenderEngine }) {
     const colors = geometry.attributes.color.array as Float32Array
     const scales = geometry.attributes.scale.array as Float32Array
 
-    particles.forEach((particle, i) => {
+    particles.forEach((particle: ParticlePhysics, i: number) => {
       // Physics calculations
       if (engine.capabilities.physics) {
         // Gravitational attraction to mouse
@@ -216,6 +217,7 @@ function ParticleSystem({ engine }: { engine: RenderEngine }) {
 
       // Dynamic scaling
       const baseScale = 0.5 + Math.sin(timeRef.current + i * 0.1) * 0.3
+      const distance = particle.position.distanceTo(attractorRef.current)
       const proximityScale = distance < 20 ? 1 + (20 - distance) / 20 : 1
       scales[i] = baseScale * proximityScale * (0.5 + lifeFactor * 0.5)
     })
@@ -232,7 +234,7 @@ function ParticleSystem({ engine }: { engine: RenderEngine }) {
   const colors = new Float32Array(particleCount * 3)
   const scales = new Float32Array(particleCount)
 
-  particles.forEach((particle, i) => {
+  particles.forEach((particle: ParticlePhysics, i: number) => {
     positions[i * 3] = particle.position.x
     positions[i * 3 + 1] = particle.position.y
     positions[i * 3 + 2] = particle.position.z
@@ -373,7 +375,16 @@ export default function Background3D() {
     }
     
     mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange)
+      // Additional cleanup for Three.js resources when component unmounts
+      if (typeof window !== 'undefined') {
+        // Cancel any pending animation frames
+        const rafIds = (window as any).__backgroundRafIds || []
+        rafIds.forEach((id: number) => cancelAnimationFrame(id))
+        delete (window as any).__backgroundRafIds
+      }
+    }
   }, [])
 
   // Performance-based fallback
@@ -416,19 +427,32 @@ export default function Background3D() {
         background: 'radial-gradient(ellipse at center, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 1) 100%)'
       }}
     >
-      <Canvas
-        camera={{ position: [0, 0, 70], fov: 65 }}
-        gl={{
-          antialias: true,
-          alpha: true,
-          powerPreference: 'high-performance'
+      <ErrorBoundary
+        fallback={
+          <div className="fixed inset-0 z-0">
+            <CSSFallback />
+          </div>
+        }
+        onError={(error) => {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('Three.js Background Error:', error)
+          }
         }}
-        dpr={Math.min(window.devicePixelRatio, 2)}
       >
-        <Suspense fallback={null}>
-          <ParticleSystem engine={engine} />
-        </Suspense>
-      </Canvas>
+        <Canvas
+          camera={{ position: [0, 0, 70], fov: 65 }}
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference: 'high-performance'
+          }}
+          dpr={Math.min(window.devicePixelRatio, 2)}
+        >
+          <Suspense fallback={null}>
+            <ParticleSystem engine={engine} />
+          </Suspense>
+        </Canvas>
+      </ErrorBoundary>
       
       {/* Performance indicator for development */}
       {process.env.NODE_ENV === 'development' && (
