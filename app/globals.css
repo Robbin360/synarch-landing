@@ -1,9 +1,9 @@
 /**
  * Global Styles for SYNARCH Landing Page
- * Tailwind CSS base styles and custom component overrides
+ * Luxury Tech Monopoly Experience - Desktop-First Premium Design
  * 
- * Note: @tailwind directives are processed by PostCSS with Tailwind plugin
- * CSS linting may show warnings but these are valid Tailwind directives
+ * Implements luxury color palette, advanced typography hierarchy,
+ * and performance-optimized animations for high-end user experience.
  */
 
 /* CSS validation: Tailwind directives are valid PostCSS at-rules */
@@ -15,11 +15,33 @@
 /* csslint ignore:end */
 /* stylelint-enable at-rule-no-unknown */
 
-/* Root variables */
+/* Root variables for luxury design system */
 :root {
   --font-inter: 'Inter', sans-serif;
   --font-playfair: 'Playfair Display', serif;
+  
+  /* Luxury color palette */
+  --deep-black: #0A0A0A;
+  --charcoal: #1A1A1A;
+  --pure-white: #FFFFFF;
+  --platinum: #E5E5E5;
+  --luxury-gold: #D4AF37;
+  --electric-blue: #00D4FF;
+  
+  /* Spacing system */
+  --luxury-spacing-xs: 0.5rem;
+  --luxury-spacing-sm: 1rem;
+  --luxury-spacing-md: 2rem;
+  --luxury-spacing-lg: 4rem;
+  --luxury-spacing-xl: 6rem;
+  --luxury-spacing-2xl: 8rem;
+  
+  /* Animation easing */
+  --luxury-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --luxury-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --luxury-ease-out: cubic-bezier(0, 0, 0.2, 1);
 }
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -30,37 +52,89 @@ html {
   scroll-behavior: smooth;
   /* Prevent fixed header from covering anchored content */
   scroll-padding-top: 84px; /* approx header height */
+  
+  /* Enhanced for luxury experience */
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   font-family: var(--font-inter);
-  background-color: #111111;
-  color: #FFFFFF;
+  background-color: var(--deep-black);
+  color: var(--pure-white);
   line-height: 1.6;
+  
+  /* Performance optimizations */
+  will-change: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  
+  /* Luxury typography rendering */
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  font-variant-ligatures: common-ligatures;
 }
 
+/* Luxury typography classes */
 .font-serif {
   font-family: var(--font-playfair);
 }
 
-/* Page transitions */
+.luxury-heading {
+  font-family: var(--font-playfair);
+  font-weight: 200;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.luxury-subheading {
+  font-family: var(--font-playfair);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.executive-text {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+.luxury-mono {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Luxury page transitions with enhanced effects */
 .page-enter {
   opacity: 0;
-  filter: blur(6px);
-  transform: translateY(8px);
+  filter: blur(8px);
+  transform: translateY(20px) scale(0.98);
 }
 .page-enter-active {
   opacity: 1;
   filter: blur(0px);
-  transform: translateY(0px);
-  transition: opacity 400ms ease, filter 400ms ease, transform 400ms ease;
+  transform: translateY(0px) scale(1);
+  transition: opacity 600ms var(--luxury-ease), 
+              filter 600ms var(--luxury-ease), 
+              transform 600ms var(--luxury-ease);
 }
 
-/* Advanced button animations */
+/* Advanced luxury button system */
 .synarch-button {
   position: relative;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s var(--luxury-ease);
+  transform-origin: center;
+  will-change: transform, box-shadow;
+  
+  /* Hardware acceleration */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .synarch-button::before {
@@ -70,8 +144,11 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255,255,255,0.15), 
+    transparent);
+  transition: left 0.6s var(--luxury-ease);
 }
 
 .synarch-button:hover::before {
@@ -79,22 +156,26 @@ body {
 }
 
 .synarch-button:hover {
-  box-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
-  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.4),
+              0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px) scale(1.02);
 }
 
 .synarch-button:active {
-  transform: scale(0.98);
+  transform: translateY(-1px) scale(0.98);
+  transition: transform 0.1s ease;
 }
 
-/* Accessible focus state for keyboard users */
+/* Luxury focus states for accessibility */
 .synarch-button:focus,
 .synarch-button:focus-visible {
-  outline: 3px solid rgba(130,120,255,0.28);
-  outline-offset: 3px;
-  box-shadow: 0 0 0 4px rgba(130,120,255,0.08);
+  outline: 3px solid rgba(212, 175, 55, 0.4);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.1),
+              0 0 30px rgba(212, 175, 55, 0.3);
 }
 
+/* Luxury ripple effect */
 .synarch-button.clicked::after {
   content: '';
   position: absolute;
@@ -103,59 +184,233 @@ body {
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+  background: radial-gradient(circle, 
+    rgba(212, 175, 55, 0.6) 0%, 
+    transparent 70%);
   transform-origin: center;
-  animation: ripple 0.6s linear;
+  animation: luxuryRipple 0.8s var(--luxury-ease);
 }
 
-@keyframes ripple {
+@keyframes luxuryRipple {
   to {
-    width: 300px;
-    height: 300px;
-    margin-left: -150px;
-    margin-top: -150px;
+    width: 400px;
+    height: 400px;
+    margin-left: -200px;
+    margin-top: -200px;
     opacity: 0;
   }
 }
 
-/* Scroll animations */
+/* Luxury scroll animations with hardware acceleration */
 .fade-in-up {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(40px) translateZ(0);
+  transition: all 0.8s var(--luxury-ease);
+  will-change: transform, opacity;
 }
 
 .fade-in-up.animate-in {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateZ(0);
 }
 
-/* Responsive refinements */
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(40px) translateZ(0);
+  transition: all 0.8s var(--luxury-ease);
+  will-change: transform, opacity;
+}
+
+.slide-in-right.animate-in {
+  opacity: 1;
+  transform: translateX(0) translateZ(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9) translateZ(0);
+  transition: all 0.6s var(--luxury-ease);
+  will-change: transform, opacity;
+}
+
+.scale-in.animate-in {
+  opacity: 1;
+  transform: scale(1) translateZ(0);
+}
+
+/* Luxury interaction states */
+.luxury-hover {
+  transition: all 0.3s var(--luxury-ease);
+  will-change: transform;
+}
+
+.luxury-hover:hover {
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.magnetic-hover {
+  transition: transform 0.2s var(--luxury-ease);
+  will-change: transform;
+}
+
+/* Luxury card animations */
+.luxury-card {
+  position: relative;
+  background: var(--charcoal);
+  border: 1px solid rgba(229, 229, 229, 0.1);
+  transition: all 0.4s var(--luxury-ease);
+  will-change: transform, box-shadow, border-color;
+}
+
+.luxury-card:hover {
+  background: rgba(26, 26, 26, 0.9);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+              0 0 40px rgba(212, 175, 55, 0.1);
+  transform: translateY(-4px) translateZ(0);
+}
+
+.luxury-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(212, 175, 55, 0.03) 0%, 
+    transparent 50%, 
+    rgba(0, 212, 255, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.4s var(--luxury-ease);
+  pointer-events: none;
+}
+
+.luxury-card:hover::before {
+  opacity: 1;
+}
+
+/* Desktop-first responsive refinements */
+@media (max-width: 1440px) {
+  .luxury-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .luxury-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .luxury-heading {
+    font-size: 3rem;
+  }
+}
+
 @media (max-width: 768px) {
   .thesis-page, .entities-page, .contact-page {
-    padding: 1rem;
+    padding: 1.5rem;
   }
+  
   .pillar-grid, .focus-grid, .services-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
   }
+  
   .synarch-form .form-row {
     flex-direction: column;
   }
+  
   .synarch-button {
     transition: all 0.2s ease;
+    min-height: 48px; /* Touch target size */
+  }
+  
+  .luxury-heading {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .luxury-card {
+    padding: 1.5rem;
   }
 }
 
-/* Respect users who prefer reduced motion */
+@media (max-width: 480px) {
+  .luxury-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .luxury-heading {
+    font-size: 2rem;
+  }
+}
+
+/* Luxury accessibility features */
 @media (prefers-reduced-motion: reduce) {
   .synarch-button,
   .fade-in-up,
+  .slide-in-right,
+  .scale-in,
   .page-enter,
-  .page-enter-active {
+  .page-enter-active,
+  .luxury-hover,
+  .magnetic-hover,
+  .luxury-card {
     transition: none !important;
     animation: none !important;
+    transform: none !important;
   }
-  /* Disable heavy animations for users who prefer reduced motion.
-     Components using Framer Motion should also check useReducedMotion() hook */
+  
+  /* Maintain essential interactive feedback for reduced motion users */
+  .synarch-button:hover,
+  .luxury-card:hover {
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5);
+    outline: 2px solid rgba(212, 175, 55, 0.3);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .luxury-card {
+    border-color: var(--pure-white);
+  }
+  
+  .synarch-button {
+    border: 2px solid var(--pure-white);
+  }
+}
+
+/* Focus management for luxury experience */
+.focus-visible {
+  outline: 3px solid var(--luxury-gold);
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar for luxury feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--deep-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--luxury-gold), var(--electric-blue));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #F4D03F, #33E0FF);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: var(--pure-white);
 }

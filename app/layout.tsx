@@ -4,6 +4,8 @@ import './globals.css'
 import Background3D from '@/components/Background3D'
 import ClientLayout from '@/components/ClientLayout'
 import ScrollObserver from '@/components/ScrollObserver'
+import ScrollController from '@/components/ScrollController'
+import LuxuryCursor from '@/components/LuxuryCursor'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
@@ -37,14 +39,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className={`${inter.className} bg-[#111111] text-white antialiased`}>
+      <body className={`${inter.className} bg-deep-black text-pure-white antialiased overflow-x-hidden`}>
+        <LuxuryCursor />
         <Background3D />
-        <div className="relative z-10">
-          <ScrollObserver />
-          <Header />
-          <ClientLayout>{children}</ClientLayout>
-          <Footer />
-        </div>
+        <ScrollController>
+          <div className="relative z-10">
+            <ScrollObserver />
+            <Header />
+            <ClientLayout>{children}</ClientLayout>
+            <Footer />
+          </div>
+        </ScrollController>
       </body>
     </html>
   )

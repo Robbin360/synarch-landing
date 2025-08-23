@@ -1,4 +1,4 @@
-import Hero from '@/components/Hero'
+import LuxuryHero from '@/components/LuxuryHero'
 import Thesis from '@/components/Thesis'
 import Entities from '@/components/Entities'
 import Contact from '@/components/Contact'
@@ -8,7 +8,7 @@ import QuickNavButtons from '@/components/QuickNavButtons'
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Hero />
+      <LuxuryHero />
       <Reveal>
         <Thesis />
       </Reveal>

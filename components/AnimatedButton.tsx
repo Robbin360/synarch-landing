@@ -8,8 +8,8 @@ type AnimatedButtonProps = {
   children: React.ReactNode
   onClick?: (e?: React.MouseEvent) => void
   href?: string | URL
-  variant?: 'primary' | 'secondary'
-  // allow button type when rendering a native <button>
+  variant?: 'primary' | 'secondary' | 'luxury' | 'ghost'
+  size?: 'sm' | 'md' | 'lg' | 'luxury'
   type?: 'button' | 'submit' | 'reset'
   className?: string
   loading?: boolean
@@ -20,6 +20,7 @@ export default function AnimatedButton({
   onClick,
   href,
   variant = 'primary',
+  size = 'md',
   className = '',
   loading = false,
   type = 'button',
@@ -29,22 +30,36 @@ export default function AnimatedButton({
   const [pulseKey, setPulseKey] = useState(0)
   const reduceMotion = useReducedMotion()
 
-  const base =
-    'relative inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm md:text-base tracking-wide transition-colors duration-200'
-  const palette =
-    variant === 'primary'
-      ? 'text-white bg-white/5 hover:bg-white/10'
-      : 'text-white/80 bg-white/0 hover:bg-white/10'
+  // Size variants for luxury experience
+  const sizeClasses = {
+    sm: 'px-4 py-2 text-sm',
+    md: 'px-6 py-3 text-sm md:text-base',
+    lg: 'px-8 py-4 text-base md:text-lg',
+    luxury: 'px-12 py-5 text-lg md:text-xl'
+  }
+
+  const base = `relative inline-flex items-center justify-center rounded-lg tracking-wide transition-all duration-300 will-change-transform transform-gpu ${sizeClasses[size]}`
+
+  // Luxury color palettes
+  const variantStyles = {
+    primary: 'text-pure-white bg-luxury-gold/20 border border-luxury-gold/30 hover:bg-luxury-gold/30 hover:border-luxury-gold/50 hover:shadow-gold-glow',
+    secondary: 'text-pure-white bg-charcoal/50 border border-platinum/20 hover:bg-charcoal/70 hover:border-platinum/40 hover:shadow-luxury',
+    luxury: 'text-deep-black bg-luxury-gold border border-luxury-gold hover:bg-luxury-gold/90 hover:shadow-gold-glow',
+    ghost: 'text-platinum bg-transparent border border-platinum/30 hover:bg-platinum/10 hover:border-platinum/50'
+  }
 
   const content = (
     <motion.span
-      initial={{ filter: 'brightness(1)', textShadow: '0 0 0px rgba(123, 97, 255, 0)' }}
+      initial={{ filter: 'brightness(1)' }}
       whileHover={reduceMotion ? undefined : {
-        textShadow: '0 0 12px rgba(123, 97, 255, 0.6), 0 0 24px rgba(92, 164, 255, 0.4)'
+        filter: variant === 'luxury' ? 'brightness(1.1)' : 'brightness(1.2)',
+        textShadow: variant === 'luxury' 
+          ? '0 0 8px rgba(212, 175, 55, 0.8)' 
+          : '0 0 12px rgba(255, 255, 255, 0.3)'
       }}
       animate={reduceMotion ? { scale: 1 } : { scale: isPressed ? 0.98 : 1 }}
       transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 400, damping: 30 }}
-      className="relative z-10"
+      className="relative z-10 font-medium"
     >
       {children}
     </motion.span>
@@ -53,79 +68,80 @@ export default function AnimatedButton({
   const handleClick = (e?: React.MouseEvent) => {
     setPulseKey((k) => k + 1)
     setClicked(true)
-    setTimeout(() => setClicked(false), 450)
+    setTimeout(() => setClicked(false), 600)
     onClick?.(e)
   }
 
   const ButtonCore = (
     <motion.button
       type={type}
-      whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.96 }}
+      whileHover={reduceMotion ? undefined : { 
+        y: -2,
+        transition: { duration: 0.2, ease: 'easeOut' }
+      }}
       onMouseDown={() => setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}
       onMouseLeave={() => setIsPressed(false)}
       onClick={handleClick}
-      className={`${base} ${palette} synarch-button ${clicked ? 'clicked' : ''} ${className}`}
+      className={`${base} ${variantStyles[variant]} synarch-button luxury-hover ${clicked ? 'clicked' : ''} ${className}`}
       aria-busy={loading || undefined}
     >
-      {/* Glow layers */}
+      {/* Luxury background glow */}
       <motion.span
-        className="absolute inset-0 rounded-lg"
-        initial={{ opacity: 0 }}
+        className="absolute inset-0 rounded-lg opacity-0"
         whileHover={reduceMotion ? undefined : { opacity: 1 }}
         style={{
-          background:
-            'radial-gradient(40% 40% at 50% 50%, rgba(146, 97, 255, 0.25) 0%, rgba(146, 97, 255, 0.0) 100%)',
+          background: variant === 'luxury' 
+            ? 'radial-gradient(50% 50% at 50% 50%, rgba(212, 175, 55, 0.3) 0%, transparent 100%)'
+            : 'radial-gradient(50% 50% at 50% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 100%)',
         }}
       />
 
+      {/* Shine effect */}
       <motion.span
-        className="absolute inset-0 rounded-lg"
-        animate={reduceMotion ? { boxShadow: '0 0 0px rgba(0,0,0,0)' } : {
-          boxShadow: loading
-            ? [
-                '0 0 0px rgba(146,97,255,0.0)',
-                '0 0 22px rgba(146,97,255,0.35)',
-                '0 0 0px rgba(146,97,255,0.0)',
-              ]
-            : '0 0 0px rgba(0,0,0,0)',
+        className="absolute inset-0 rounded-lg overflow-hidden"
+        initial={{ x: '-100%' }}
+        whileHover={reduceMotion ? undefined : {
+          x: '100%',
+          transition: { duration: 0.6, ease: 'easeInOut' }
         }}
-        transition={reduceMotion ? { duration: 0 } : { duration: loading ? 1.2 : 0.2, repeat: loading ? Infinity : 0 }}
-      />
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+      </motion.span>
 
-      {/* Click pulse */}
+      {/* Enhanced pulse effect */}
       {!reduceMotion && (
         <motion.span
           key={pulseKey}
           className="absolute inset-0 rounded-lg"
-          initial={{ opacity: 0.35, scale: 0 }}
-          animate={{ opacity: 0, scale: 1.6 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          initial={{ opacity: 0.5, scale: 0.8 }}
+          animate={{ opacity: 0, scale: 2 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           style={{
-            background:
-              'radial-gradient(35% 35% at 50% 50%, rgba(146, 97, 255, 0.35) 0%, rgba(146, 97, 255, 0.0) 100%)',
+            background: variant === 'luxury'
+              ? 'radial-gradient(40% 40% at 50% 50%, rgba(212, 175, 55, 0.4) 0%, transparent 100%)'
+              : 'radial-gradient(40% 40% at 50% 50%, rgba(0, 212, 255, 0.3) 0%, transparent 100%)',
           }}
         />
       )}
 
-      {/* Loading orbiting particles */}
+      {/* Loading state with luxury spinner */}
       {loading && !reduceMotion && (
-        <motion.span
-          className="pointer-events-none absolute inset-0"
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, rotate: 360 }}
-          transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
+          animate={{ opacity: 1 }}
         >
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[calc(50%+12px)] w-1.5 h-1.5 rounded-full"
-            style={{ background: 'linear-gradient(180deg, #8e5cff, #5b7cfa)' }} />
-          <span className="absolute left-[calc(50%+10px)] top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full"
-            style={{ background: 'linear-gradient(180deg, #5b7cfa, #8e5cff)' }} />
-          <span className="absolute left-[calc(50%-10px)] top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full"
-            style={{ background: 'linear-gradient(180deg, #7e6bff, #6aa6ff)' }} />
-        </motion.span>
+          <motion.div
+            className="w-5 h-5 border-2 border-current border-t-transparent rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+          />
+        </motion.div>
       )}
 
-      {content}
+      {!loading && content}
     </motion.button>
   )
 
