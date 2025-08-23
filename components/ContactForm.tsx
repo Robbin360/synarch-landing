@@ -99,7 +99,7 @@ export default function ContactForm() {
 
       <section className="max-w-4xl mx-auto contact-form fade-in-up">
         <h2 className="font-serif text-2xl md:text-3xl font-medium mb-4">Strategic Inquiry Form</h2>
-  <form ref={formRef} onSubmit={submit} className="synarch-form grid grid-cols-1 md:grid-cols-2 gap-6 bg-white/5 p-6 rounded-xl border border-white/10" noValidate>
+        <form ref={formRef} onSubmit={submit} className="synarch-form grid grid-cols-1 md:grid-cols-2 gap-6 bg-white/5 p-6 rounded-xl border border-white/10" noValidate>
           <div className="form-row grid grid-cols-1 md:grid-cols-2 gap-6 md:col-span-2">
             <div className="form-group">
               <label htmlFor="name" className="block text-sm text-white/70 mb-1">Name *</label>
@@ -220,7 +220,7 @@ export default function ContactForm() {
         <div className="mt-8 bg-white/5 rounded-xl p-6 border border-white/10 text-center">
           <h3 className="font-serif text-xl mb-2">Strategic Consultation</h3>
           <p className="text-white/80 mb-2">To schedule a strategic consultation, please submit the form above and indicate your preferred timeline. Our team will reach out to coordinate a session tailored to your needs.</p>
-          <p className="text-white/60 text-sm">(Integraci\u0000n con un sistema de agendamiento externo estar\u0000 disponible pr\u0000ximamente.)</p>
+          <p className="text-white/60 text-sm">(Integración con un sistema de agendamiento externo estará disponible próximamente.)</p>
         </div>
       </section>
       <div className="py-16 flex items-center justify-center">

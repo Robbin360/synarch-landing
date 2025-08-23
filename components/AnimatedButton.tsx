@@ -1,4 +1,4 @@
- 'use client'
+'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
@@ -59,8 +59,8 @@ export default function AnimatedButton({
 
   const ButtonCore = (
     <motion.button
-  type={type}
-  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+      type={type}
+      whileTap={reduceMotion ? undefined : { scale: 0.98 }}
       onMouseDown={() => setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}
       onMouseLeave={() => setIsPressed(false)}
@@ -71,8 +71,8 @@ export default function AnimatedButton({
       {/* Glow layers */}
       <motion.span
         className="absolute inset-0 rounded-lg"
-  initial={{ opacity: 0 }}
-  whileHover={reduceMotion ? undefined : { opacity: 1 }}
+        initial={{ opacity: 0 }}
+        whileHover={reduceMotion ? undefined : { opacity: 1 }}
         style={{
           background:
             'radial-gradient(40% 40% at 50% 50%, rgba(146, 97, 255, 0.25) 0%, rgba(146, 97, 255, 0.0) 100%)',

@@ -1,9 +1,19 @@
-/*
-  The following @tailwind directives require Tailwind CSS to process this file.
-  Make sure your build tool (e.g., Next.js, PostCSS, Vite) is configured to use Tailwind.
-*/
-/* @tailwind directives removed because Tailwind CSS is not configured to process this file. */
-/* If you set up Tailwind, you can restore these lines. */
+/**
+ * Global Styles for SYNARCH Landing Page
+ * Tailwind CSS base styles and custom component overrides
+ * 
+ * Note: @tailwind directives are processed by PostCSS with Tailwind plugin
+ * CSS linting may show warnings but these are valid Tailwind directives
+ */
+
+/* CSS validation: Tailwind directives are valid PostCSS at-rules */
+/* stylelint-disable at-rule-no-unknown */
+/* csslint ignore:start */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* csslint ignore:end */
+/* stylelint-enable at-rule-no-unknown */
 
 /* Root variables */
 :root {
@@ -31,7 +41,7 @@ body {
 
 .font-serif {
   font-family: var(--font-playfair);
-} 
+}
 
 /* Page transitions */
 .page-enter {
@@ -94,6 +104,7 @@ body {
   height: 0;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+  transform-origin: center;
   animation: ripple 0.6s linear;
 }
 
@@ -145,5 +156,6 @@ body {
     transition: none !important;
     animation: none !important;
   }
-  /* Reduce framer-motion heavy animations via CSS fallback; components should also check this preference */
+  /* Disable heavy animations for users who prefer reduced motion.
+     Components using Framer Motion should also check useReducedMotion() hook */
 }
