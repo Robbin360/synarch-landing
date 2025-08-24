@@ -414,3 +414,175 @@ body {
   background: rgba(212, 175, 55, 0.3);
   color: var(--pure-white);
 }
+
+/* Advanced Accessibility Styles */
+
+/* Skip Links */
+.skip-links {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--luxury-gold);
+  color: var(--deep-black);
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 10000;
+  font-weight: 600;
+  transition: top 0.3s ease;
+}
+
+.skip-links:focus {
+  top: 6px;
+}
+
+/* Screen Reader Only Content */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* High Contrast Mode */
+.high-contrast {
+  --deep-black: #000000;
+  --pure-white: #ffffff;
+  --luxury-gold: #ffff00;
+  --electric-blue: #00ffff;
+}
+
+.high-contrast * {
+  border-color: currentColor !important;
+}
+
+.high-contrast img {
+  filter: contrast(150%) brightness(120%);
+}
+
+/* Reduced Motion Override */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Increased Font Size */
+.increased-font-size {
+  font-size: calc(var(--base-font-size, 1rem) * 1.2);
+}
+
+.increased-font-size h1 { font-size: calc(3rem * 1.2); }
+.increased-font-size h2 { font-size: calc(2.25rem * 1.2); }
+.increased-font-size h3 { font-size: calc(1.875rem * 1.2); }
+
+.increased-font-size button,
+.increased-font-size a {
+  min-height: 44px;
+  padding: calc(var(--padding, 0.5rem) * 1.2);
+}
+
+/* Dyslexia Support */
+.dyslexia-support {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', cursive, sans-serif;
+  letter-spacing: 0.12em;
+  word-spacing: 0.16em;
+  line-height: 1.8;
+}
+
+/* Keyboard Navigation */
+.keyboard-navigation [tabindex="-1"]:focus {
+  outline: none;
+}
+
+.keyboard-navigation .focus-visible {
+  outline: 3px solid var(--luxury-gold);
+  outline-offset: 2px;
+}
+
+/* Touch Target Improvements */
+@media (pointer: coarse) {
+  button, a, input, select, textarea,
+  [role="button"], [role="link"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px;
+  }
+}
+
+/* Accessibility Toolbar */
+.accessibility-toolbar {
+  position: fixed;
+  top: 50%;
+  right: -280px;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.95);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px 0 0 8px;
+  z-index: 10000;
+  width: 300px;
+  transition: right 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.accessibility-toolbar.open {
+  right: 0;
+}
+
+.accessibility-toolbar h3 {
+  margin-bottom: 1rem;
+  color: var(--luxury-gold);
+  font-size: 1.1rem;
+}
+
+.accessibility-toolbar button {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.accessibility-toolbar button:hover,
+.accessibility-toolbar button:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.accessibility-toolbar button.active {
+  background: var(--luxury-gold);
+  color: var(--deep-black);
+  border-color: var(--luxury-gold);
+}
+
+.accessibility-toolbar-toggle {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: var(--luxury-gold);
+  color: var(--deep-black);
+  border: none;
+  padding: 12px 8px;
+  border-radius: 8px 0 0 8px;
+  cursor: pointer;
+  z-index: 10001;
+  font-weight: 600;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}

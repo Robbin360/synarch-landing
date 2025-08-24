@@ -72,29 +72,19 @@ export default function AnimatedButton({
     onClick?.(e)
   }
 
-  const ButtonCore = (
-    <motion.button
-      type={type}
-      whileTap={reduceMotion ? undefined : { scale: 0.96 }}
-      whileHover={reduceMotion ? undefined : { 
-        y: -2,
-        transition: { duration: 0.2, ease: 'easeOut' }
-      }}
-      onMouseDown={() => setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      onMouseLeave={() => setIsPressed(false)}
-      onClick={handleClick}
-      className={`${base} ${variantStyles[variant]} synarch-button luxury-hover ${clicked ? 'clicked' : ''} ${className}`}
-      aria-busy={loading || undefined}
-    >
+  // Shared visual effects for both button and link
+  const renderVisualEffects = (isLink = false) => (
+    <>
       {/* Luxury background glow */}
       <motion.span
         className="absolute inset-0 rounded-lg opacity-0"
         whileHover={reduceMotion ? undefined : { opacity: 1 }}
         style={{
-          background: variant === 'luxury' 
-            ? 'radial-gradient(50% 50% at 50% 50%, rgba(212, 175, 55, 0.3) 0%, transparent 100%)'
-            : 'radial-gradient(50% 50% at 50% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 100%)',
+          background: isLink
+            ? 'radial-gradient(40% 40% at 50% 50%, rgba(146, 97, 255, 0.25) 0%, rgba(146, 97, 255, 0.0) 100%)'
+            : variant === 'luxury' 
+              ? 'radial-gradient(50% 50% at 50% 50%, rgba(212, 175, 55, 0.3) 0%, transparent 100%)'
+              : 'radial-gradient(50% 50% at 50% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 100%)',
         }}
       />
 
@@ -115,90 +105,27 @@ export default function AnimatedButton({
         <motion.span
           key={pulseKey}
           className="absolute inset-0 rounded-lg"
-          initial={{ opacity: 0.5, scale: 0.8 }}
-          animate={{ opacity: 0, scale: 2 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          initial={{ opacity: isLink ? 0.35 : 0.5, scale: isLink ? 0 : 0.8 }}
+          animate={{ opacity: 0, scale: isLink ? 1.6 : 2 }}
+          transition={{ duration: isLink ? 0.6 : 0.8, ease: 'easeOut' }}
           style={{
-            background: variant === 'luxury'
-              ? 'radial-gradient(40% 40% at 50% 50%, rgba(212, 175, 55, 0.4) 0%, transparent 100%)'
-              : 'radial-gradient(40% 40% at 50% 50%, rgba(0, 212, 255, 0.3) 0%, transparent 100%)',
+            background: isLink
+              ? 'radial-gradient(35% 35% at 50% 50%, rgba(146, 97, 255, 0.35) 0%, rgba(146, 97, 255, 0.0) 100%)'
+              : variant === 'luxury'
+                ? 'radial-gradient(40% 40% at 50% 50%, rgba(212, 175, 55, 0.4) 0%, transparent 100%)'
+                : 'radial-gradient(40% 40% at 50% 50%, rgba(0, 212, 255, 0.3) 0%, transparent 100%)',
           }}
         />
       )}
 
-      {/* Loading state with luxury spinner */}
+      {/* Loading state */}
       {loading && !reduceMotion && (
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <motion.div
-            className="w-5 h-5 border-2 border-current border-t-transparent rounded-full"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-          />
-        </motion.div>
-      )}
-
-      {!loading && content}
-    </motion.button>
-  )
-
-  if (href) {
-    // Usar Link de Next.js para navegación interna
-    return (
-      <Link href={href} legacyBehavior passHref>
-        <motion.a
-          whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-          onMouseDown={() => setIsPressed(true)}
-          onMouseUp={() => setIsPressed(false)}
-          onMouseLeave={() => setIsPressed(false)}
-          onClick={handleClick}
-          className={`${base} ${variantStyles[variant]} synarch-button ${clicked ? 'clicked' : ''} ${className}`}
-          aria-busy={loading || undefined}
-          role="link"
-          aria-label={typeof children === 'string' ? children : undefined}
-        >
-          <motion.span
-            className="absolute inset-0 rounded-lg"
-            initial={{ opacity: 0 }}
-            whileHover={reduceMotion ? undefined : { opacity: 1 }}
-            style={{
-              background:
-                'radial-gradient(40% 40% at 50% 50%, rgba(146, 97, 255, 0.25) 0%, rgba(146, 97, 255, 0.0) 100%)',
-            }}
-          />
-
-          <motion.span
-            className="absolute inset-0 rounded-lg"
-            animate={reduceMotion ? { boxShadow: '0 0 0px rgba(0,0,0,0)' } : {
-              boxShadow: loading
-                ? [
-                    '0 0 0px rgba(146,97,255,0.0)',
-                    '0 0 22px rgba(146,97,255,0.35)',
-                    '0 0 0px rgba(146,97,255,0.0)',
-                  ]
-                : '0 0 0px rgba(0,0,0,0)',
-            }}
-            transition={reduceMotion ? { duration: 0 } : { duration: loading ? 1.2 : 0.2, repeat: loading ? Infinity : 0 }}
-          />
-
-          {!reduceMotion && (
-            <motion.span
-              key={pulseKey}
-              className="absolute inset-0 rounded-lg"
-              initial={{ opacity: 0.35, scale: 0 }}
-              animate={{ opacity: 0, scale: 1.6 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-              style={{
-                background:
-                  'radial-gradient(35% 35% at 50% 50%, rgba(146, 97, 255, 0.35) 0%, rgba(146, 97, 255, 0.0) 100%)',
-              }}
-            />
-          )}
-
-          {loading && !reduceMotion && (
+          {isLink ? (
             <motion.span
               className="pointer-events-none absolute inset-0"
               initial={{ opacity: 0 }}
@@ -212,8 +139,67 @@ export default function AnimatedButton({
               <span className="absolute left-[calc(50%-10px)] top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full"
                 style={{ background: 'linear-gradient(180deg, #7e6bff, #6aa6ff)' }} />
             </motion.span>
+          ) : (
+            <motion.div
+              className="w-5 h-5 border-2 border-current border-t-transparent rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+            />
           )}
+        </motion.div>
+      )}
+    </>
+  )
 
+  const ButtonCore = (
+    <motion.button
+      type={type}
+      whileTap={reduceMotion ? undefined : { scale: 0.96 }}
+      whileHover={reduceMotion ? undefined : { 
+        y: -2,
+        transition: { duration: 0.2, ease: 'easeOut' }
+      }}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onMouseLeave={() => setIsPressed(false)}
+      onClick={handleClick}
+      className={`${base} ${variantStyles[variant]} synarch-button luxury-hover ${clicked ? 'clicked' : ''} ${className}`}
+      aria-busy={loading || undefined}
+    >
+      {renderVisualEffects()}
+      {!loading && content}
+    </motion.button>
+  )
+
+  if (href) {
+    return (
+      <Link href={href} legacyBehavior passHref>
+        <motion.a
+          whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+          onMouseDown={() => setIsPressed(true)}
+          onMouseUp={() => setIsPressed(false)}
+          onMouseLeave={() => setIsPressed(false)}
+          onClick={handleClick}
+          className={`${base} ${variantStyles[variant]} synarch-button ${clicked ? 'clicked' : ''} ${className}`}
+          aria-busy={loading || undefined}
+          role="link"
+          aria-label={typeof children === 'string' ? children : undefined}
+        >
+          {renderVisualEffects(true)}
+          {/* Additional link-specific animations */}
+          <motion.span
+            className="absolute inset-0 rounded-lg"
+            animate={reduceMotion ? { boxShadow: '0 0 0px rgba(0,0,0,0)' } : {
+              boxShadow: loading
+                ? [
+                    '0 0 0px rgba(146,97,255,0.0)',
+                    '0 0 22px rgba(146,97,255,0.35)',
+                    '0 0 0px rgba(146,97,255,0.0)',
+                  ]
+                : '0 0 0px rgba(0,0,0,0)',
+            }}
+            transition={reduceMotion ? { duration: 0 } : { duration: loading ? 1.2 : 0.2, repeat: loading ? Infinity : 0 }}
+          />
           {content}
         </motion.a>
       </Link>
