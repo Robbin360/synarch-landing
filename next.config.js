@@ -1,30 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Server external packages (moved from experimental.serverComponentsExternalPackages)
+  serverExternalPackages: ['three'],
+  
+  // Set output file tracing root to silence workspace warnings
+  outputFileTracingRoot: __dirname,
+  
   // Enable experimental features for better performance
   experimental: {
-    // Enable React Server Components optimizations
-    serverComponentsExternalPackages: ['three'],
     // Optimize bundle splitting
-    optimizePackageImports: ['three', '@react-three/fiber', '@react-three/drei'],
-    // Enable turbo mode for faster builds
-    turbo: {
-      rules: {
-        '*.glsl': {
-          loaders: ['raw-loader'],
-          as: '*.js',
-        },
-      },
-    },
+    optimizePackageImports: ['framer-motion', 'gsap'],
   },
 
   // Webpack optimizations
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Optimize Three.js imports
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      // Optimize Three.js tree shaking
-      three: 'three/src/Three.js',
-    }
+    // Don't modify Three.js imports since it's marked as external for server components
+    // config.resolve.alias for three.js removed to avoid conflict with serverComponentsExternalPackages
 
     // Bundle analyzer in development
     if (process.env.ANALYZE === 'true') {

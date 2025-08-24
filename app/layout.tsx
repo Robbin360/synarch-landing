@@ -8,9 +8,10 @@ import ScrollController from '@/components/ScrollController'
 import LuxuryCursor from '@/components/LuxuryCursor'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import ErrorBoundary, { setupGlobalErrorHandling } from '@/components/ErrorBoundary'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import { PerformanceDashboard } from '@/components/PerformanceMonitor'
-import { AccessibilityManager } from '@/components/AccessibilityManager'
+import NoSSR from '@/components/NoSSR'
+import ClientInitializer from '@/components/ClientInitializer'
 
 // Font configurations with performance optimizations
 const inter = Inter({ 
@@ -107,20 +108,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Initialize global error handling and performance monitoring
-  if (typeof window !== 'undefined') {
-    setupGlobalErrorHandling()
-    
-    // Initialize accessibility manager
-    const accessibilityManager = AccessibilityManager.getInstance()
-    accessibilityManager.initialize()
-    
-    // Mark app start time for performance calculations
-    if (!window.__appStartTime) {
-      window.__appStartTime = Date.now()
-    }
-  }
-
   return (
     <html 
       lang="en" 
@@ -208,44 +195,40 @@ export default function RootLayout({
           Skip to navigation
         </a>
         
-        <ErrorBoundary
-          feature="app-root"
-          onError={(error, errorInfo, context) => {
-            if (process.env.NODE_ENV === 'development') {
-              console.error('Global Error Boundary:', error, errorInfo, context)
-            }
-          }}
-        >
-          <LuxuryCursor />
-          <Background3D />
-          <ScrollController>
-            <div className="relative z-10">
-              <ScrollObserver />
-              <Header />
-              <main id="main-content" role="main" aria-label="Main content">
-                <ErrorBoundary
-                  feature="page-content"
-                  fallback={
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="text-center p-8">
-                        <h1 className="text-2xl font-bold text-red-400 mb-4">Page Error</h1>
-                        <p className="text-gray-400 mb-6">Something went wrong loading this page.</p>
-                        <button 
-                          onClick={() => window.location.reload()}
-                          className="px-6 py-2 bg-luxury-gold text-deep-black rounded-lg hover:bg-luxury-gold/90 transition-colors"
-                        >
-                          Reload Page
-                        </button>
+        <ErrorBoundary feature="app-root">
+          <NoSSR>
+            <ClientInitializer />
+            <LuxuryCursor />
+            <Background3D />
+            <ScrollController>
+              <div className="relative z-10">
+                <ScrollObserver />
+                <Header />
+                <main id="main-content" role="main" aria-label="Main content">
+                  <ErrorBoundary
+                    feature="page-content"
+                    fallback={
+                      <div className="min-h-screen flex items-center justify-center">
+                        <div className="text-center p-8">
+                          <h1 className="text-2xl font-bold text-red-400 mb-4">Page Error</h1>
+                          <p className="text-gray-400 mb-6">Something went wrong loading this page.</p>
+                          <a 
+                            href="/"
+                            className="inline-block px-6 py-2 bg-luxury-gold text-deep-black rounded-lg hover:bg-luxury-gold/90 transition-colors"
+                          >
+                            Go Home
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                  }
-                >
-                  <ClientLayout>{children}</ClientLayout>
-                </ErrorBoundary>
-              </main>
-              <Footer />
-            </div>
-          </ScrollController>
+                    }
+                  >
+                    <ClientLayout>{children}</ClientLayout>
+                  </ErrorBoundary>
+                </main>
+                <Footer />
+              </div>
+            </ScrollController>
+          </NoSSR>
           
           {/* Performance monitoring dashboard for development */}
           <PerformanceDashboard 

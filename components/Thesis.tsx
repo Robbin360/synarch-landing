@@ -33,8 +33,7 @@ export default function Thesis() {
       y: 0,
       scale: 1,
       transition: {
-        duration: 1,
-        ease: [0.4, 0, 0.2, 1]
+        duration: 1
       }
     }
   }
@@ -52,7 +51,7 @@ export default function Thesis() {
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 1.2 }}
             viewport={{ once: true, margin: '-20%' }}
             className="mb-20"
           >

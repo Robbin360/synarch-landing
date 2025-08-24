@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss'
-import containerQueries from '@tailwindcss/container-queries'
+// Temporarily removed: import containerQueries from '@tailwindcss/container-queries'
 
 const config: Config = {
   content: [
@@ -24,8 +24,6 @@ const config: Config = {
         'quantum-purple': '#8B5CF6',
         'neural-green': '#10B981',
         'plasma-orange': '#F59E0B',
-        // Legacy support
-        charcoal: '#111111',
         // Semantic colors
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
@@ -224,7 +222,7 @@ const config: Config = {
     },
   },
   plugins: [
-    containerQueries,
+    // Temporarily removed: containerQueries,
   ],
 }
 export default config 

@@ -32,8 +32,7 @@ function EntityCard({ title, description, accent, index }: EntityCardProps) {
       rotateX: 0,
       transition: {
         duration: 1,
-        delay: index * 0.2,
-        ease: [0.4, 0, 0.2, 1]
+        delay: index * 0.2
       }
     }
   }
@@ -44,8 +43,7 @@ function EntityCard({ title, description, accent, index }: EntityCardProps) {
       scale: 1.02,
       rotateY: 2,
       transition: {
-        duration: 0.4,
-        ease: [0.4, 0, 0.2, 1]
+        duration: 0.4
       }
     }
   }
@@ -175,7 +173,7 @@ export default function Entities() {
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 1.2 }}
             viewport={{ once: true, margin: '-20%' }}
             className="text-center mb-20"
           >

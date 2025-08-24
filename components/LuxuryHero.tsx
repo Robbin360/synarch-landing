@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, Variants } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import AnimatedButton from '@/components/AnimatedButton'
 import LuxuryContainer from '@/components/LuxuryContainer'
@@ -13,7 +13,7 @@ export default function LuxuryHero() {
     setMounted(true)
   }, [])
 
-  const heroVariants = {
+  const heroVariants: Variants = {
     hidden: { 
       opacity: 0,
       y: 40,
@@ -25,13 +25,12 @@ export default function LuxuryHero() {
       scale: 1,
       transition: {
         duration: 1.2,
-        ease: [0.4, 0, 0.2, 1],
         staggerChildren: 0.2
       }
     }
   }
 
-  const childVariants = {
+  const childVariants: Variants = {
     hidden: { 
       opacity: 0,
       y: 30
@@ -40,8 +39,7 @@ export default function LuxuryHero() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: [0.4, 0, 0.2, 1]
+        duration: 0.8
       }
     }
   }

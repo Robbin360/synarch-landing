@@ -53,7 +53,7 @@ export default function LuxuryContainer({
         className={baseClasses}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+        transition={{ duration: 0.8 }}
         viewport={{ once: true, margin: '-10%' }}
       >
         {children}
