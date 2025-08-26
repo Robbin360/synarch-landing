@@ -679,10 +679,8 @@ function ParticleSystem({ engine }: { engine: RenderEngine }) {
         depthWrite: false
       })
       
-      // Enable instancing if supported
-      if (engine.capabilities.instancing) {
-        mat.defines = { USE_INSTANCING: '' }
-      }
+      // Note: PointsMaterial doesn't support custom defines
+      // Instancing would need to be handled at a higher level
       
       return mat
     })
