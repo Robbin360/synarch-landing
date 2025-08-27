@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Server external packages (moved from experimental.serverComponentsExternalPackages)
-  serverExternalPackages: ['three'],
-  
   // Set output file tracing root to silence workspace warnings
   outputFileTracingRoot: __dirname,
   
@@ -14,9 +11,6 @@ const nextConfig = {
 
   // Webpack optimizations
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Don't modify Three.js imports since it's marked as external for server components
-    // config.resolve.alias for three.js removed to avoid conflict with serverComponentsExternalPackages
-
     // Bundle analyzer in development
     if (process.env.ANALYZE === 'true') {
       const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
@@ -39,13 +33,6 @@ const nextConfig = {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
             priority: 10,
-            reuseExistingChunk: true,
-          },
-          // Three.js chunk
-          three: {
-            test: /[\\/]node_modules[\\/](three|@react-three)[\\/]/,
-            name: 'three',
-            priority: 20,
             reuseExistingChunk: true,
           },
           // UI components chunk
@@ -76,7 +63,7 @@ const nextConfig = {
 
     // Optimize production builds
     if (!dev) {
-      // Tree shaking for Three.js
+      // Tree shaking optimizations
       config.optimization.usedExports = true
       config.optimization.sideEffects = false
 
@@ -161,7 +148,7 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Required for Three.js
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
               "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
               "font-src 'self' fonts.gstatic.com",
               "img-src 'self' data: blob:",

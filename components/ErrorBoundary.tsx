@@ -80,12 +80,6 @@ class TelemetryService {
       return { severity: 'high', tags: ['network', 'connectivity'] }
     }
     
-    // WebGL/Three.js related errors
-    if (message.includes('webgl') || message.includes('three') || 
-        message.includes('shader') || message.includes('texture')) {
-      return { severity: 'medium', tags: ['webgl', 'graphics', 'three-js'] }
-    }
-    
     // Memory related errors
     if (message.includes('memory') || message.includes('allocation') ||
         message.includes('out of memory')) {
@@ -719,13 +713,6 @@ class ErrorBoundary extends Component<Props, State> {
       return {
         title: 'Connection Issue',
         description: 'Unable to connect to our servers. Please check your internet connection and try again.'
-      }
-    }
-    
-    if (context.tags.includes('webgl') || context.tags.includes('three-js')) {
-      return {
-        title: 'Graphics Error',
-        description: 'There was an issue with 3D graphics rendering. This might be due to browser compatibility or graphics drivers.'
       }
     }
     

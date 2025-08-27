@@ -61,7 +61,6 @@ npm run dev
   Thesis.tsx           # Home thesis section
   Contact.tsx          # Home contact section
   AnimatedButton.tsx   # Advanced animated button component
-  Background3D.tsx     # Three.js background particles
   ClientLayout.tsx     # Framer Motion page transitions
   Reveal.tsx           # Scroll reveal wrapper
   TypingHeading.tsx    # Typing effect heading

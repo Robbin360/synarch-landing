@@ -15,7 +15,7 @@ interface MemoryState {
 
 interface MemoryLeak {
   id: string
-  type: 'dom' | 'event' | 'observer' | 'animation' | 'worker' | 'webgl' | 'unknown'
+  type: 'dom' | 'event' | 'observer' | 'animation' | 'worker' | 'unknown'
   description: string
   size: number
   timestamp: number

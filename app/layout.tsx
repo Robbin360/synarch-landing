@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
-import Background3D from '@/components/Background3D'
 import ClientLayout from '@/components/ClientLayout'
 import ScrollObserver from '@/components/ScrollObserver'
 import ScrollController from '@/components/ScrollController'
@@ -199,7 +198,6 @@ export default function RootLayout({
           <NoSSR>
             <ClientInitializer />
             <LuxuryCursor />
-            <Background3D />
             <ScrollController>
               <div className="relative z-10">
                 <ScrollObserver />
