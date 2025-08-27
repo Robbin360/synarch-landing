@@ -50,6 +50,7 @@ export default function AnimatedButton({
 
   const content = (
     <motion.span
+      key="button-content"
       initial={{ filter: 'brightness(1)' }}
       whileHover={reduceMotion ? undefined : {
         filter: variant === 'luxury' ? 'brightness(1.1)' : 'brightness(1.2)',
@@ -60,6 +61,11 @@ export default function AnimatedButton({
       animate={reduceMotion ? { scale: 1 } : { scale: isPressed ? 0.98 : 1 }}
       transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 400, damping: 30 }}
       className="relative z-10 font-medium"
+      style={{ 
+        color: 'inherit',
+        visibility: 'visible',
+        opacity: 1
+      }}
     >
       {children}
     </motion.span>

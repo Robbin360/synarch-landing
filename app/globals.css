@@ -743,3 +743,28 @@ header nav [data-testid="quick-nav"] .synarch-button:hover > span[class*="font-"
   color: #D4AF37 !important;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.6) !important;
 }
+
+/* === TRANSICIÓN SPA FIX === */
+/* Fuerza visibilidad durante transiciones de AnimatePresence */
+[data-testid="quick-nav"] * {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+[data-testid="quick-nav"] *:hover {
+  color: #D4AF37 !important;
+}
+
+/* Override cualquier estilo inline de Framer Motion */
+header [data-testid="quick-nav"] [style*="opacity"] {
+  opacity: 1 !important;
+}
+
+header [data-testid="quick-nav"] [style*="color"] {
+  color: #FFFFFF !important;
+}
+
+header [data-testid="quick-nav"] [style*="visibility"] {
+  visibility: visible !important;
+}
