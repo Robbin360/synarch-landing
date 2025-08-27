@@ -95,19 +95,24 @@ export default function LuxuryCursor() {
     setCursorState(prev => ({ ...prev, isVisible: false }))
   }, [])
 
-  // Interactive element detection with improved magnetic effect
+  // Interactive element detection with improved decorative effect
   const handleInteractiveEnter = useCallback((e: Event) => {
     const target = e.target as HTMLElement
     
-    // Only apply magnetic effect if not in reduced motion mode
+    // Reduced magnetic effect - only slight pull for decoration
     if (!reduceMotion) {
       const rect = target.getBoundingClientRect()
       const centerX = rect.left + rect.width / 2
       const centerY = rect.top + rect.height / 2
       
-      // Magnetic effect
-      cursorX.set(centerX)
-      cursorY.set(centerY)
+      // Gentle magnetic effect - less aggressive to preserve cursor precision
+      const currentX = cursorX.get()
+      const currentY = cursorY.get()
+      const magneticX = currentX + (centerX - currentX) * 0.15
+      const magneticY = currentY + (centerY - currentY) * 0.15
+      
+      cursorX.set(magneticX)
+      cursorY.set(magneticY)
     }
     
     setCursorState(prev => ({ 
@@ -172,24 +177,39 @@ export default function LuxuryCursor() {
     }
   }, [handleMouseMove, handleMouseEnter, handleMouseLeave, handleInteractiveEnter, handleInteractiveLeave, reduceMotion])
 
-  // Hide default cursor
+  // Apply appropriate cursor styles for interactive elements
   useEffect(() => {
-    document.body.style.cursor = 'none'
+    // Allow native cursor to work normally
+    // Add hover styles for interactive elements
+    const style = document.createElement('style')
+    style.textContent = `
+      .luxury-hover:hover {
+        cursor: pointer !important;
+      }
+      button:hover, a:hover, [role="button"]:hover {
+        cursor: pointer !important;
+      }
+      input:hover, textarea:hover, select:hover {
+        cursor: text !important;
+      }
+    `
+    document.head.appendChild(style)
+    
     return () => {
-      document.body.style.cursor = 'auto'
+      document.head.removeChild(style)
     }
   }, [])
 
   const getCursorSize = () => {
     switch (cursorState.cursorType) {
       case 'interactive':
-        return { width: 60, height: 60 }
+        return { width: 48, height: 48 }
       case 'magnetic':
-        return { width: 80, height: 80 }
+        return { width: 64, height: 64 }
       case 'text':
-        return { width: 40, height: 40 }
+        return { width: 32, height: 32 }
       default:
-        return { width: 40, height: 40 }
+        return { width: 32, height: 32 }
     }
   }
 
@@ -213,8 +233,8 @@ export default function LuxuryCursor() {
   return (
     <AnimatePresence>
       {cursorState.isVisible && (
-        <div className="pointer-events-none fixed inset-0 z-50 mix-blend-difference">
-          {/* Outer cursor ring */}
+        <div className="pointer-events-none fixed inset-0 z-50 mix-blend-difference select-none">
+          {/* Outer cursor ring - Decorative only */}
           <motion.div
             style={{
               x: springX,
@@ -222,36 +242,38 @@ export default function LuxuryCursor() {
               width: getCursorSize().width,
               height: getCursorSize().height,
               borderColor: getCursorColor(),
-              transform: 'translate(-50%, -50%)'
+              transform: 'translate(-50%, -50%)',
+              transformOrigin: 'center'
             }}
             animate={{
-              scale: cursorState.isInteracting ? 1.5 : 1,
-              opacity: cursorState.isInteracting ? 0.8 : 0.6,
+              scale: cursorState.isInteracting ? 1.8 : 1,
+              opacity: cursorState.isInteracting ? 0.9 : 0.4,
             }}
             transition={{
-              scale: { duration: 0.2, ease: 'easeOut' },
+              scale: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
               opacity: { duration: 0.2 }
             }}
-            className="absolute rounded-full border border-current"
+            className="absolute rounded-full border-2 border-current"
           />
 
-          {/* Inner cursor dot */}
+          {/* Inner cursor dot - Enhanced visibility */}
           <motion.div
             style={{
               x: innerCursorX,
               y: innerCursorY,
               backgroundColor: getCursorColor(),
-              transform: 'translate(-50%, -50%)'
+              transform: 'translate(-50%, -50%)',
+              transformOrigin: 'center'
             }}
             animate={{
-              scale: cursorState.isInteracting ? 0.5 : 1,
-              opacity: cursorState.isInteracting ? 1 : 0.8,
+              scale: cursorState.isInteracting ? 0.8 : 1,
+              opacity: cursorState.isInteracting ? 1 : 0.7,
             }}
             transition={{
-              scale: { duration: 0.15, ease: 'easeOut' },
+              scale: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
               opacity: { duration: 0.15 }
             }}
-            className="absolute w-2 h-2 rounded-full"
+            className="absolute w-3 h-3 rounded-full shadow-lg"
           />
 
           {/* Interaction indicator */}
