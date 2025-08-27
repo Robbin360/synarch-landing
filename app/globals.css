@@ -620,3 +620,91 @@ body {
   -webkit-text-fill-color: transparent;
   text-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
 }
+
+/* Navigation Links Visibility Fix */
+.nav-link,
+header nav a,
+header nav button {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
+}
+
+.nav-link:hover,
+header nav a:hover,
+header nav button:hover {
+  color: #D4AF37 !important;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.5) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Quick Nav Buttons Specific Styling */
+[data-testid="quick-nav"] button,
+[data-testid="quick-nav"] a {
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background-color: rgba(26, 26, 26, 0.6) !important;
+}
+
+[data-testid="quick-nav"] button:hover,
+[data-testid="quick-nav"] a:hover {
+  color: #D4AF37 !important;
+  border-color: rgba(212, 175, 55, 0.6) !important;
+  background-color: rgba(26, 26, 26, 0.8) !important;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* Maximum specificity navigation fix */
+header [data-testid="quick-nav"] .synarch-button {
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  background: rgba(26, 26, 26, 0.7) !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+header [data-testid="quick-nav"] .synarch-button:hover {
+  color: #D4AF37 !important;
+  border-color: rgba(212, 175, 55, 0.7) !important;
+  background: rgba(26, 26, 26, 0.9) !important;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Fallback for any navigation links */
+header nav * {
+  color: #FFFFFF !important;
+}
+
+header nav *:hover {
+  color: #D4AF37 !important;
+}
+
+/* Emergency visibility fix - último recurso */
+@media screen {
+  header a,
+  header button {
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-flex !important;
+  }
+  
+  header a:hover,
+  header button:hover {
+    color: #D4AF37 !important;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.6) !important;
+  }
+  
+  /* Asegurar que el texto sea siempre visible */
+  header [class*="text-"] {
+    color: #FFFFFF !important;
+  }
+  
+  header [class*="text-"]:hover {
+    color: #D4AF37 !important;
+  }
+}

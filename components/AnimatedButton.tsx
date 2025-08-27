@@ -43,9 +43,9 @@ export default function AnimatedButton({
   // Luxury color palettes
   const variantStyles = {
     primary: 'text-pure-white bg-luxury-gold/20 border border-luxury-gold/30 hover:bg-luxury-gold/30 hover:border-luxury-gold/50 hover:shadow-gold-glow',
-    secondary: 'text-pure-white bg-charcoal/50 border border-platinum/20 hover:bg-charcoal/70 hover:border-platinum/40 hover:shadow-luxury',
+    secondary: 'text-white bg-charcoal/60 border border-white/30 hover:bg-charcoal/80 hover:border-white/50 hover:shadow-luxury hover:text-luxury-gold',
     luxury: 'text-deep-black bg-luxury-gold border border-luxury-gold hover:bg-luxury-gold/90 hover:shadow-gold-glow',
-    ghost: 'text-platinum bg-transparent border border-platinum/30 hover:bg-platinum/10 hover:border-platinum/50'
+    ghost: 'text-white bg-transparent border border-white/40 hover:bg-white/10 hover:border-white/60 hover:text-luxury-gold'
   }
 
   const content = (
