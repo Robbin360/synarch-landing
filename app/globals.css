@@ -708,3 +708,38 @@ header nav *:hover {
     color: #D4AF37 !important;
   }
 }
+
+/* === FIX: VISIBILIDAD DE ENLACES DE NAVEGACIÓN === */
+/* Solución específica para el span interno de Framer Motion */
+[data-testid="quick-nav"] .synarch-button > span {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Efecto hover específico para el span interno */
+[data-testid="quick-nav"] .synarch-button:hover > span {
+  color: #D4AF37 !important;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.6) !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease !important;
+}
+
+/* Backup con mayor especificidad para casos edge */
+header [data-testid="quick-nav"] .synarch-button span.font-medium {
+  color: #FFFFFF !important;
+}
+
+header [data-testid="quick-nav"] .synarch-button:hover span.font-medium {
+  color: #D4AF37 !important;
+}
+
+/* Máxima especificidad anti-Framer Motion inline styles */
+header nav [data-testid="quick-nav"] .synarch-button > span[class*="font-"] {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+
+header nav [data-testid="quick-nav"] .synarch-button:hover > span[class*="font-"] {
+  color: #D4AF37 !important;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.6) !important;
+}
