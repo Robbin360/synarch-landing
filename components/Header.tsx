@@ -53,6 +53,7 @@ export default function Header() {
 
   return (
     <header
+      id="navigation"
       className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 backdrop-blur-sm bg-[#111111]/[0.92]"
       role="banner"
     >
@@ -69,7 +70,9 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center" role="navigation" aria-label="Primary navigation">
-          <QuickNavButtons />
+          <div key="desktop-nav">
+            <QuickNavButtons />
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -109,8 +112,9 @@ export default function Header() {
           className="md:hidden mt-4 pb-4 border-t border-white/10 pt-4" 
           role="navigation"
           aria-label="Mobile navigation"
+          key="mobile-nav"
         >
-          <div className="flex flex-wrap gap-3 px-4">
+          <div className="flex flex-wrap gap-3 px-4" key="mobile-nav-container">
             <QuickNavButtons />
           </div>
         </nav>

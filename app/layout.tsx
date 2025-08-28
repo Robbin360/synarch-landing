@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
+import dynamic from 'next/dynamic'
 import './globals.css'
 import ClientLayout from '@/components/ClientLayout'
 import ScrollObserver from '@/components/ScrollObserver'
@@ -11,6 +12,13 @@ import ErrorBoundary from '@/components/ErrorBoundary'
 import { PerformanceDashboard } from '@/components/PerformanceMonitor'
 import NoSSR from '@/components/NoSSR'
 import ClientInitializer from '@/components/ClientInitializer'
+import NavigationDebugger from '@/components/NavigationDebugger'
+
+// Importación dinámica para evitar hydration mismatch
+const AccessibilitySkipLinks = dynamic(
+  () => import('@/components/AccessibilitySkipLinks'),
+  { ssr: false }
+)
 
 // Font configurations with performance optimizations
 const inter = Inter({ 
@@ -186,18 +194,15 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} bg-deep-black text-pure-white antialiased overflow-x-hidden`}>
-        {/* Skip Links for Accessibility */}
-        <a href="#main-content" className="skip-links sr-only focus:not-sr-only">
-          Skip to main content
-        </a>
-        <a href="#navigation" className="skip-links sr-only focus:not-sr-only">
-          Skip to navigation
-        </a>
+        {/* Skip Links for Accessibility - Renderizado solo en cliente */}
+        <AccessibilitySkipLinks />
         
         <ErrorBoundary feature="app-root">
           <NoSSR>
             <ClientInitializer />
-            <LuxuryCursor />
+            {/* DEBUGGING: TEST #1 - DISABLED LuxuryCursor */}
+            {/* <LuxuryCursor /> */}
+            {/* DEBUGGING: TEST #2 - READY TO DISABLE ScrollController */}
             <ScrollController>
               <div className="relative z-10">
                 <ScrollObserver />
@@ -245,6 +250,9 @@ export default function RootLayout({
           
           {/* Accessibility Toolbar */}
           <div id="accessibility-toolbar-container" />
+          
+          {/* Navigation Debugger - Development Only */}
+          <NavigationDebugger />
         </ErrorBoundary>
       </body>
     </html>
