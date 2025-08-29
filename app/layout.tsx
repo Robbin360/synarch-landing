@@ -12,7 +12,7 @@ import { PerformanceDashboard } from '@/components/PerformanceMonitor'
 import NoSSR from '@/components/NoSSR'
 import ClientInitializer from '@/components/ClientInitializer'
 import NavigationDebugger from '@/components/NavigationDebugger'
-import DynamicSkipLinks from '@/components/DynamicSkipLinks'
+import SafeSkipLinks from '@/components/SafeSkipLinks'
 
 
 
@@ -190,8 +190,8 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} bg-deep-black text-pure-white antialiased overflow-x-hidden`}>
-        {/* Skip Links for Accessibility - Renderizado solo en cliente */}
-        <DynamicSkipLinks />
+        {/* Skip Links for Accessibility - Renderizado seguro sin errores de hidratación */}
+        <SafeSkipLinks />
         
         <ErrorBoundary feature="app-root">
           <NoSSR>

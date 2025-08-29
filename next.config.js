@@ -67,11 +67,11 @@ const nextConfig = {
       config.optimization.usedExports = true
       config.optimization.sideEffects = false
 
-      // Add DefinePlugin for environment variables
+      // Add DefinePlugin for environment variables (preventing duplicates)
       config.plugins.push(
         new webpack.DefinePlugin({
           'process.env.NODE_ENV': JSON.stringify('production'),
-          'process.env.NEXT_PUBLIC_BUILD_VERSION': JSON.stringify(buildId),
+          // Remove duplicate NEXT_PUBLIC_BUILD_VERSION as it's handled in env section
         })
       )
 
@@ -113,8 +113,8 @@ const nextConfig = {
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 
-  // Output configuration
-  output: 'standalone',
+  // Output configuration - removed standalone for better compatibility
+  // output: 'standalone',
   
   // Performance optimizations
   poweredByHeader: false,
