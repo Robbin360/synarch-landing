@@ -32,6 +32,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://synarch.vercel.app'),
   title: {
     default: 'SYNARCH - Architects of Inevitability',
     template: '%s | SYNARCH'

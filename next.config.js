@@ -9,6 +9,16 @@ const nextConfig = {
     optimizePackageImports: ['framer-motion', 'gsap'],
   },
 
+  // Turbopack configuration for when enabled
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
+
   // Webpack optimizations
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Bundle analyzer in development
@@ -23,8 +33,8 @@ const nextConfig = {
       )
     }
 
-    // Optimize chunk splitting
-    if (!isServer) {
+    // Optimize chunk splitting (only in production for faster dev builds)
+    if (!isServer && !dev) {
       config.optimization.splitChunks = {
         chunks: 'all',
         cacheGroups: {
@@ -91,6 +101,24 @@ const nextConfig = {
         }
         return plugin
       })
+    }
+
+    // Development optimizations for faster compilation
+    if (dev) {
+      // Reduce filesystem checks
+      config.watchOptions = {
+        ignored: ['**/node_modules/**', '**/.git/**', '**/dist/**'],
+        aggregateTimeout: 300,
+        poll: false,
+      }
+      
+      // Optimize development builds
+      config.optimization = {
+        ...config.optimization,
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
+      }
     }
 
     return config
