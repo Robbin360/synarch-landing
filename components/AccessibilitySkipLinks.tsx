@@ -13,8 +13,10 @@
  */
 
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function AccessibilitySkipLinks() {
+  const t = useTranslations('AccessibilitySkipLinks')
   const [isMounted, setIsMounted] = useState(false)
 
   // Asegurar que solo se renderiza en el cliente
@@ -34,13 +36,13 @@ export default function AccessibilitySkipLinks() {
         href="#main-content" 
         className="skip-links sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-luxury-gold focus:text-deep-black focus:rounded-lg focus:font-medium focus:shadow-lg"
       >
-        Skip to main content
+        {t('skipToMain')}
       </a>
       <a 
         href="#navigation" 
         className="skip-links sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-40 focus:z-50 focus:px-4 focus:py-2 focus:bg-luxury-gold focus:text-deep-black focus:rounded-lg focus:font-medium focus:shadow-lg"
       >
-        Skip to navigation
+        {t('skipToNavigation')}
       </a>
     </>
   )

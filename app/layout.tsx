@@ -13,6 +13,8 @@ import NoSSR from '@/components/NoSSR'
 import ClientInitializer from '@/components/ClientInitializer'
 import NavigationDebugger from '@/components/NavigationDebugger'
 import SafeSkipLinks from '@/components/SafeSkipLinks'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
 
 
 
@@ -107,11 +109,15 @@ export const viewport: Viewport = {
   ],
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
+  
   return (
     <html 
       lang="en" 
@@ -191,65 +197,67 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} bg-deep-black text-pure-white antialiased overflow-x-hidden`}>
-        {/* Skip Links for Accessibility - Renderizado seguro sin errores de hidratación */}
-        <SafeSkipLinks />
-        
-        <ErrorBoundary feature="app-root">
-          <NoSSR>
-            <ClientInitializer />
-            <LuxuryCursor />
-            {/* DEBUGGING: TEST #2 - READY TO DISABLE ScrollController */}
-            <ScrollController>
-              <div className="relative z-10">
-                <ScrollObserver />
-                <Header />
-                <main id="main-content" role="main" aria-label="Main content">
-                  <ErrorBoundary
-                    feature="page-content"
-                    fallback={
-                      <div className="min-h-screen flex items-center justify-center">
-                        <div className="text-center p-8">
-                          <h1 className="text-2xl font-bold text-red-400 mb-4">Page Error</h1>
-                          <p className="text-gray-400 mb-6">Something went wrong loading this page.</p>
-                          <a 
-                            href="/"
-                            className="inline-block px-6 py-2 bg-luxury-gold text-deep-black rounded-lg hover:bg-luxury-gold/90 transition-colors"
-                          >
-                            Go Home
-                          </a>
+        <NextIntlClientProvider messages={messages}>
+          {/* Skip Links for Accessibility - Renderizado seguro sin errores de hidratación */}
+          <SafeSkipLinks />
+          
+          <ErrorBoundary feature="app-root">
+            <NoSSR>
+              <ClientInitializer />
+              <LuxuryCursor />
+              {/* DEBUGGING: TEST #2 - READY TO DISABLE ScrollController */}
+              <ScrollController>
+                <div className="relative z-10">
+                  <ScrollObserver />
+                  <Header />
+                  <main id="main-content" role="main" aria-label="Main content">
+                    <ErrorBoundary
+                      feature="page-content"
+                      fallback={
+                        <div className="min-h-screen flex items-center justify-center">
+                          <div className="text-center p-8">
+                            <h1 className="text-2xl font-bold text-red-400 mb-4">Page Error</h1>
+                            <p className="text-gray-400 mb-6">Something went wrong loading this page.</p>
+                            <a 
+                              href="/"
+                              className="inline-block px-6 py-2 bg-luxury-gold text-deep-black rounded-lg hover:bg-luxury-gold/90 transition-colors"
+                            >
+                              Go Home
+                            </a>
+                          </div>
                         </div>
-                      </div>
-                    }
-                  >
-                    <ClientLayout>{children}</ClientLayout>
-                  </ErrorBoundary>
-                </main>
-                <Footer />
-              </div>
-            </ScrollController>
-          </NoSSR>
-          
-          {/* Performance monitoring dashboard for development */}
-          <PerformanceDashboard 
-            budget={{
-              CLS: 0.1,
-              FID: 100,
-              LCP: 2500,
-              FCP: 1800,
-              TTFB: 800,
-              fps: 45, // Slightly higher threshold for luxury experience
-              memoryUsage: 150 // Higher threshold for 3D content
-            }}
-            showAlerts={true}
-            compact={false}
-          />
-          
-          {/* Accessibility Toolbar */}
-          <div id="accessibility-toolbar-container" />
-          
-          {/* Navigation Debugger - Development Only */}
-          <NavigationDebugger />
-        </ErrorBoundary>
+                      }
+                    >
+                      <ClientLayout>{children}</ClientLayout>
+                    </ErrorBoundary>
+                  </main>
+                  <Footer />
+                </div>
+              </ScrollController>
+            </NoSSR>
+            
+            {/* Performance monitoring dashboard for development */}
+            <PerformanceDashboard 
+              budget={{
+                CLS: 0.1,
+                FID: 100,
+                LCP: 2500,
+                FCP: 1800,
+                TTFB: 800,
+                fps: 45, // Slightly higher threshold for luxury experience
+                memoryUsage: 150 // Higher threshold for 3D content
+              }}
+              showAlerts={true}
+              compact={false}
+            />
+            
+            {/* Accessibility Toolbar */}
+            <div id="accessibility-toolbar-container" />
+            
+            {/* Navigation Debugger - Development Only */}
+            <NavigationDebugger />
+          </ErrorBoundary>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

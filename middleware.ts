@@ -1,4 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
+import createIntlMiddleware from 'next-intl/middleware'
+import { locales, defaultLocale } from './i18n'
+
+// Create the intl middleware
+const intlMiddleware = createIntlMiddleware({
+  locales,
+  defaultLocale,
+  localePrefix: 'as-needed'
+})
 
 // Security headers configuration
 const securityHeaders = {
@@ -130,7 +139,16 @@ function logSecurityEvent(type: string, request: NextRequest, details?: any) {
 }
 
 export function middleware(request: NextRequest) {
-  const response = NextResponse.next()
+  // First handle internationalization
+  const intlResponse = intlMiddleware(request)
+  
+  // If intl returns a redirect or special response, use it
+  if (intlResponse && intlResponse.status !== 200) {
+    return intlResponse
+  }
+  
+  // Otherwise continue with security middleware
+  const response = intlResponse || NextResponse.next()
   const { pathname } = request.nextUrl
   const userAgent = request.headers.get('user-agent') || ''
   const ip = request.headers.get('x-forwarded-for') || 
@@ -248,14 +266,8 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public files (robots.txt, sitemap.xml, etc.)
-     */
+    // Enable internationalization
+    '/(en|es)/:path*',
     '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.).*)',
   ],
 }
