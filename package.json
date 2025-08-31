@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cpy 'i18n.ts' 'middleware.ts' 'next-intl.config.js' 'messages' '.next/' --parents && next build",
+    "build": "cpy i18n.ts middleware.ts next-intl.config.js messages .next/ --parents && next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
