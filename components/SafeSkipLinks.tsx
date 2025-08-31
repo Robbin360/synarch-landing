@@ -19,23 +19,12 @@
  */
 
 import { Suspense } from 'react'
-import ClientBoundary from './ClientBoundary'
 import AccessibilitySkipLinks from './AccessibilitySkipLinks'
 
 export default function SafeSkipLinks() {
   return (
-    <ClientBoundary
-      suppressHydrationWarning={true}
-      fallback={
-        // Fallback mínimo para preservar accesibilidad básica durante SSR
-        <div className="sr-only">
-          <a href="#main-content">Skip to main content</a>
-        </div>
-      }
-    >
-      <Suspense fallback={null}>
-        <AccessibilitySkipLinks />
-      </Suspense>
-    </ClientBoundary>
+    <Suspense fallback={null}>
+      <AccessibilitySkipLinks />
+    </Suspense>
   )
 }

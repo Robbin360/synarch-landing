@@ -15,8 +15,7 @@ import NavigationDebugger from '@/components/NavigationDebugger'
 import SafeSkipLinks from '@/components/SafeSkipLinks'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
-
-
+import { notFound } from 'next/navigation'
 
 // Font configurations with performance optimizations
 const inter = Inter({ 
@@ -114,9 +113,20 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Ensure we're using a valid locale
+  // In a real app, you would get this from the request or params
+  const locale = 'en' // Default to English for now
+  
   // Providing all messages to the client
   // side is the easiest way to get started
-  const messages = await getMessages();
+  let messages = {}
+  try {
+    messages = await getMessages()
+  } catch (error) {
+    console.error('Error loading messages:', error)
+    // Fallback to empty messages if there's an error
+    messages = {}
+  }
   
   return (
     <html 
