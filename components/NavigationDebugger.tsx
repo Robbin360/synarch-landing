@@ -84,13 +84,15 @@ export default function NavigationDebugger() {
     >
       <div className="font-bold text-yellow-400 mb-2">🔍 Navigation Debug</div>
       <div><strong>Path:</strong> {debugInfo.pathname}</div>
-      <div><strong>Nav Element:</strong> {debugInfo.navElement?.exists ? '✅' : '❌'}</div>
-      <div><strong>Nav Visible:</strong> {debugInfo.navElement?.visible}</div>
-      <div><strong>Nav Opacity:</strong> {debugInfo.navElement?.opacity}</div>
+      <div><strong>Nav Elements:</strong> {debugInfo.navElements?.total}</div>
+      <div><strong>Desktop Nav:</strong> {debugInfo.navElements?.desktop ? '✅' : '❌'}</div>
+      <div><strong>Mobile Nav:</strong> {debugInfo.navElements?.mobile ? '✅' : '❌'}</div>
+      <div><strong>Buttons:</strong> {debugInfo.buttons?.total} (Expected: {debugInfo.buttons?.expected})</div>
+      <div><strong>Duplicated:</strong> {debugInfo.buttons?.duplicated ? '⚠️' : '✅'}</div>
       
       <div className="mt-2 border-t border-white/20 pt-2">
-        <div className="font-bold text-blue-400">Buttons:</div>
-        {debugInfo.buttons?.map((btn: any, i: number) => (
+        <div className="font-bold text-blue-400">Button Details:</div>
+        {debugInfo.details?.map((btn: any, i: number) => (
           <div key={i} className="mt-1">
             <div><strong>{btn.text}:</strong></div>
             <div className="ml-2">
