@@ -1,22 +1,16 @@
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin('./i18n.config.ts');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Set output file tracing root to silence workspace warnings
-  outputFileTracingRoot: __dirname,
+  // Force dynamic rendering for all pages
+  staticPageGenerationTimeout: 0,
   
   // Enable experimental features for better performance
   experimental: {
     // Optimize bundle splitting
     optimizePackageImports: ['framer-motion', 'gsap'],
-  },
-
-  // Turbopack configuration for when enabled
-  turbopack: {
-    rules: {
-      '*.svg': {
-        loaders: ['@svgr/webpack'],
-        as: '*.js',
-      },
-    },
   },
 
   // Webpack optimizations
@@ -233,6 +227,12 @@ const nextConfig = {
     ignoreDuringBuilds: false,
   },
 
+  // Disable static generation for all pages
+  trailingSlash: false,
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
+
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig)

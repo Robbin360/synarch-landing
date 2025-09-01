@@ -2,5 +2,55 @@
   "AccessibilitySkipLinks": {
     "skipToMain": "Skip to main content",
     "skipToNavigation": "Skip to navigation"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "Sorry, we couldn't find the page you're looking for.",
+    "backHome": "Back to home"
+  },
+  "Manifesto": {
+    "title": "Our Manifesto",
+    "subtitle": "The principles that guide our vision",
+    "section1": {
+      "title": "Vision",
+      "content": "We envision a future where technology serves humanity, not the other way around. Our mission is to create systems that enhance human potential while preserving our core values and dignity."
+    },
+    "section2": {
+      "title": "Principles",
+      "principle1": "Human-centered design",
+      "principle2": "Ethical technology development",
+      "principle3": "Sustainable innovation",
+      "principle4": "Transparency and accountability"
+    },
+    "section3": {
+      "title": "Commitment",
+      "content": "We commit to building technology that respects human rights, promotes equality, and contributes to a better world for future generations."
+    }
+  },
+  "Terms": {
+    "title": "Terms of Service",
+    "subtitle": "Please read these terms carefully",
+    "content": "These terms of service govern your use of our website and services. By using our services, you agree to these terms.",
+    "section1": {
+      "title": "Acceptance of Terms",
+      "content": "By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement."
+    },
+    "section2": {
+      "title": "Use License",
+      "content": "Permission is granted to temporarily download one copy of the materials on this website for personal, non-commercial transitory viewing only."
+    }
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "How we protect your information",
+    "content": "This privacy policy describes how we collect, use, and protect your personal information when you use our website and services.",
+    "section1": {
+      "title": "Information We Collect",
+      "content": "We collect information you provide directly to us, such as when you contact us or sign up for our services."
+    },
+    "section2": {
+      "title": "How We Use Your Information",
+      "content": "We use the information we collect to provide, maintain, and improve our services, and to communicate with you."
+    }
   }
 }

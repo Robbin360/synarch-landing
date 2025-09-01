@@ -2,5 +2,55 @@
   "AccessibilitySkipLinks": {
     "skipToMain": "Saltar al contenido principal",
     "skipToNavigation": "Saltar a la navegación"
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "description": "Lo sentimos, no pudimos encontrar la página que buscas.",
+    "backHome": "Volver al inicio"
+  },
+  "Manifesto": {
+    "title": "Nuestro Manifiesto",
+    "subtitle": "Los principios que guían nuestra visión",
+    "section1": {
+      "title": "Visión",
+      "content": "Visualizamos un futuro donde la tecnología sirve a la humanidad, no al revés. Nuestra misión es crear sistemas que mejoren el potencial humano mientras preservan nuestros valores fundamentales y dignidad."
+    },
+    "section2": {
+      "title": "Principios",
+      "principle1": "Diseño centrado en humanos",
+      "principle2": "Desarrollo tecnológico ético",
+      "principle3": "Innovación sostenible",
+      "principle4": "Transparencia y responsabilidad"
+    },
+    "section3": {
+      "title": "Compromiso",
+      "content": "Nos comprometemos a construir tecnología que respete los derechos humanos, promueva la igualdad y contribuya a un mundo mejor para las futuras generaciones."
+    }
+  },
+  "Terms": {
+    "title": "Términos de Servicio",
+    "subtitle": "Por favor lee estos términos cuidadosamente",
+    "content": "Estos términos de servicio rigen tu uso de nuestro sitio web y servicios. Al usar nuestros servicios, aceptas estos términos.",
+    "section1": {
+      "title": "Aceptación de Términos",
+      "content": "Al acceder y usar este sitio web, aceptas y acuerdas estar sujeto a los términos y disposiciones de este acuerdo."
+    },
+    "section2": {
+      "title": "Licencia de Uso",
+      "content": "Se otorga permiso para descargar temporalmente una copia de los materiales en este sitio web solo para visualización personal, no comercial y transitoria."
+    }
+  },
+  "Privacy": {
+    "title": "Política de Privacidad",
+    "subtitle": "Cómo protegemos tu información",
+    "content": "Esta política de privacidad describe cómo recopilamos, usamos y protegemos tu información personal cuando usas nuestro sitio web y servicios.",
+    "section1": {
+      "title": "Información que Recopilamos",
+      "content": "Recopilamos información que nos proporcionas directamente, como cuando nos contactas o te registras para nuestros servicios."
+    },
+    "section2": {
+      "title": "Cómo Usamos tu Información",
+      "content": "Usamos la información que recopilamos para proporcionar, mantener y mejorar nuestros servicios, y para comunicarnos contigo."
+    }
   }
 }
