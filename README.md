@@ -1,96 +1,148 @@
-# SYNARCH Landing Page
+# Synarch Landing Page
 
-A minimalist, brutalist web design for SYNARCH, a private deep-tech holding company. The design embodies the brand's philosophy of "Silent Power" and slogan "Architects of Inevitability."
+Una landing page moderna y elegante construida con Next.js 15, TypeScript y soporte completo para internacionalización.
 
-## Tech Stack
+## 🚀 Características
 
-- **Framework**: Next.js 14+ (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Fonts**: Inter (body) and Playfair Display (headings) via Google Fonts
+- **Next.js 15** con App Router
+- **TypeScript** para type safety
+- **Internacionalización** completa (inglés/español)
+- **Animaciones** con Framer Motion y GSAP
+- **Diseño responsivo** con Tailwind CSS
+- **Optimización SEO** automática
+- **Rendimiento optimizado** con renderizado dinámico
 
-## Design Philosophy
+## 🌍 Internacionalización
 
-- **Visual Style**: Minimalist Brutalism - structural, clean, and powerful
-- **Color Palette**: Strictly monochromatic - deep charcoal (#111111) background with sharp white (#FFFFFF) text
-- **Layout**: Single scrolling experience with heavy emphasis on negative space
-- **Typography**: The design's power comes from typography, layout, and structure alone
+El proyecto soporta múltiples idiomas con next-intl:
 
-## Features
+- **Inglés** (`/en`) - Idioma por defecto
+- **Español** (`/es`) - Idioma secundario
 
-- Fully responsive design
-- Real multi-page navigation (Home, Thesis, Entities, Contact, Privacy, Terms)
-- Animated 3D background with Three.js (subtle particles, mouse interactivity)
-- Framer Motion page transitions and scroll reveal animations
-- Advanced button animations (glow, shine, ripple, loading particles)
-- Optimized fonts with next/font
-- Accessibility-focused
-- Performance-optimized
-- Mobile-first approach
+### Estructura de Rutas
+```
+/                    # Redirige automáticamente según preferencias del navegador
+/en                  # Versión en inglés
+/es                  # Versión en español
+/en/contact          # Contacto en inglés
+/es/contact          # Contacto en español
+```
 
-## Getting Started
+### Páginas Disponibles
+- **Home** (`/`) - Página principal
+- **Contact** (`/contact`) - Formulario de contacto
+- **Entities** (`/entities`) - Información de entidades
+- **Thesis** (`/thesis`) - Tesis del proyecto
+- **Manifesto** (`/manifesto`) - Manifiesto de la organización
+- **Terms** (`/terms`) - Términos de servicio
+- **Privacy** (`/privacy`) - Política de privacidad
 
-1. Install dependencies:
+## 🛠️ Instalación
+
 ```bash
+# Clonar el repositorio
+git clone https://github.com/Robbin360/synarch-landing.git
+cd synarch-landing
+
+# Instalar dependencias
 npm install
-```
-2. Run the development server:
-```bash
+
+# Ejecutar en desarrollo
 npm run dev
-```
-3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Project Structure
-
-```text
-./app/
-  layout.tsx           # Root layout, fonts, page transitions and 3D background
-  page.tsx             # Home page
-  globals.css          # Global styles and Tailwind imports
-  thesis/page.tsx      # Thesis page
-  entities/page.tsx    # Entities page
-  contact/page.tsx     # Contact page with strategic inquiry form
-  privacy/page.tsx     # Privacy Policy
-  terms/page.tsx       # Terms & Conditions
-
-./components/
-  Header.tsx           # Navigation header
-  Footer.tsx           # Footer with legal links
-  Hero.tsx             # Main hero section
-  Entities.tsx         # Home entities section
-  Thesis.tsx           # Home thesis section
-  Contact.tsx          # Home contact section
-  AnimatedButton.tsx   # Advanced animated button component
-  ClientLayout.tsx     # Framer Motion page transitions
-  Reveal.tsx           # Scroll reveal wrapper
-  TypingHeading.tsx    # Typing effect heading
-  QuickNavButtons.tsx  # Quick navigation button group
-
-package.json
-tsconfig.json
-tailwind.config.ts
-postcss.config.js
-```
-## Build and Deploy
-
-```bash
-# Build for production
+# Construir para producción
 npm run build
 
-# Start production server
+# Iniciar servidor de producción
 npm start
-
-# Lint code
-npm run lint
 ```
-## Brand Identity
 
-- **Company**: SYNARCH
-- **Philosophy**: Silent Power
-- **Slogan**: Architects of Inevitability
-- **Operating Entities**: NOEMA (R&D) and FULCRUM (Investment Platform)
-- **Contact**: contact@synarch.global
+## 📁 Estructura del Proyecto
 
-## License
+```
+synarch-landing/
+├── app/
+│   ├── [locale]/           # Rutas con localización
+│   │   ├── layout.tsx      # Layout específico para idiomas
+│   │   ├── page.tsx        # Página principal
+│   │   ├── contact/        # Página de contacto
+│   │   ├── entities/       # Página de entidades
+│   │   ├── thesis/         # Página de tesis
+│   │   ├── manifesto/      # Página de manifiesto
+│   │   ├── terms/          # Página de términos
+│   │   └── privacy/        # Página de privacidad
+│   ├── not-found.tsx       # Página 404 personalizada
+│   ├── layout.tsx          # Layout raíz
+│   └── globals.css         # Estilos globales
+├── components/             # Componentes reutilizables
+├── messages/               # Archivos de traducción
+│   ├── en.json            # Traducciones en inglés
+│   └── es.json            # Traducciones en español
+├── i18n.ts                # Configuración de idiomas
+├── i18n.config.ts         # Configuración de next-intl
+├── middleware.ts          # Middleware de internacionalización
+└── next.config.js         # Configuración de Next.js
+```
 
-Private - All rights reserved.
+## 🔧 Configuración
+
+### Variables de Entorno
+```env
+# Opcional: URL para webhooks de seguridad
+SECURITY_WEBHOOK_URL=https://your-webhook-url.com
+```
+
+### Configuración de Vercel
+El proyecto está optimizado para despliegue en Vercel con:
+- Renderizado dinámico para páginas con internacionalización
+- Configuración automática de headers de seguridad
+- Optimización de imágenes y assets
+
+## 🚀 Despliegue
+
+### Vercel (Recomendado)
+1. Conecta tu repositorio a Vercel
+2. El proyecto se desplegará automáticamente
+3. Las rutas con localización funcionarán correctamente
+
+### Otros Proveedores
+```bash
+# Construir el proyecto
+npm run build
+
+# Los archivos estarán en .next/
+```
+
+## 🐛 Solución de Problemas
+
+### Errores de Compilación
+Si encuentras errores de compilación:
+1. Asegúrate de tener Node.js 18+ instalado
+2. Ejecuta `npm install` para instalar dependencias
+3. Verifica que todas las traducciones estén completas
+
+### Problemas de Internacionalización
+- Verifica que los archivos `messages/en.json` y `messages/es.json` existan
+- Asegúrate de que `i18n.config.ts` esté configurado correctamente
+- Revisa que el middleware esté funcionando
+
+## 📝 Changelog
+
+Ver [CHANGELOG.md](./CHANGELOG.md) para un historial detallado de cambios.
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+
+## 📞 Contacto
+
+- **Proyecto**: [Synarch Landing](https://github.com/Robbin360/synarch-landing)
+- **Issues**: [GitHub Issues](https://github.com/Robbin360/synarch-landing/issues)
