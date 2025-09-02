@@ -1,10 +1,9 @@
-import { getTranslations } from 'next-intl/server'
+'use client'
 
-// Force dynamic rendering
-export const dynamic = 'force-dynamic'
+import { useTranslations } from 'next-intl'
 
-export default async function TermsPage() {
-  const t = await getTranslations('Terms')
+export default function TermsPage() {
+  const t = useTranslations('Terms')
 
   return (
     <div className="min-h-screen bg-gray-50 py-16">

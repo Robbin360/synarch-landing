@@ -1,11 +1,10 @@
+'use client'
+
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { useTranslations } from 'next-intl'
 
-// Force dynamic rendering
-export const dynamic = 'force-dynamic'
-
-export default async function NotFound() {
-  const t = await getTranslations('NotFound')
+export default function NotFound() {
+  const t = useTranslations('NotFound')
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">

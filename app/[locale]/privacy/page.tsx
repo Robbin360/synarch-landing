@@ -1,10 +1,9 @@
-import { getTranslations } from 'next-intl/server'
+'use client'
 
-// Force dynamic rendering
-export const dynamic = 'force-dynamic'
+import { useTranslations } from 'next-intl'
 
-export default async function PrivacyPage() {
-  const t = await getTranslations('Privacy')
+export default function PrivacyPage() {
+  const t = useTranslations('Privacy')
 
   return (
     <div className="min-h-screen bg-gray-50 py-16">

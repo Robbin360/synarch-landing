@@ -5,9 +5,6 @@ import Contact from '@/components/Contact'
 import Reveal from '@/components/Reveal'
 import QuickNavButtons from '@/components/QuickNavButtons'
 
-// Force dynamic rendering
-export const dynamic = 'force-dynamic'
-
 export default function Home() {
   return (
     <main className="min-h-screen">

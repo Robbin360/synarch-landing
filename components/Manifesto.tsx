@@ -1,7 +1,9 @@
-import { getTranslations } from 'next-intl/server'
+'use client'
 
-export default async function Manifesto() {
-  const t = await getTranslations('Manifesto')
+import { useTranslations } from 'next-intl'
+
+export default function Manifesto() {
+  const t = useTranslations('Manifesto')
 
   return (
     <div className="min-h-screen bg-gray-50 py-16">

@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import createIntlMiddleware from 'next-intl/middleware'
-import { locales, defaultLocale } from './i18n'
+// import createIntlMiddleware from 'next-intl/middleware'
+// import { locales, defaultLocale } from './i18n'
 
 // Create the intl middleware
-const intlMiddleware = createIntlMiddleware({
-  locales,
-  defaultLocale,
-  localePrefix: 'as-needed'
-})
+// const intlMiddleware = createIntlMiddleware({
+//   locales,
+//   defaultLocale,
+//   localePrefix: 'as-needed'
+// })
 
 // Security headers configuration
 const securityHeaders = {
@@ -139,135 +139,13 @@ function logSecurityEvent(type: string, request: NextRequest, details?: any) {
 }
 
 export function middleware(request: NextRequest) {
-  // First handle internationalization
-  const intlResponse = intlMiddleware(request)
-  
-  // If intl returns a redirect or special response, use it
-  if (intlResponse && intlResponse.status !== 200) {
-    return intlResponse
-  }
-  
-  // Otherwise continue with security middleware
-  const response = intlResponse || NextResponse.next()
-  const { pathname } = request.nextUrl
-  const userAgent = request.headers.get('user-agent') || ''
-  const ip = request.headers.get('x-forwarded-for') || 
-           request.headers.get('x-real-ip') || 
-           request.headers.get('cf-connecting-ip') || 
-           'unknown'
-
-  // Skip security checks for static assets and API routes in development
-  if (
-    pathname.startsWith('/_next/') ||
-    pathname.startsWith('/favicon.ico') ||
-    pathname.startsWith('/api/') ||
-    pathname.includes('.')
-  ) {
-    return response
-  }
-
-  // Rate limiting
-  if (!isBot(userAgent) && !rateLimit(ip)) {
-    logSecurityEvent('RATE_LIMIT_EXCEEDED', request, { ip, limit: rateLimitConfig.maxRequests })
-    
-    return new NextResponse(
-      JSON.stringify({
-        error: 'Too Many Requests',
-        message: 'Rate limit exceeded. Please try again later.',
-        retryAfter: Math.ceil(rateLimitConfig.windowMs / 1000)
-      }),
-      {
-        status: 429,
-        headers: {
-          'Content-Type': 'application/json',
-          'Retry-After': String(Math.ceil(rateLimitConfig.windowMs / 1000)),
-          ...Object.fromEntries(
-            Object.entries(securityHeaders).filter(([key]) => 
-              ['X-Frame-Options', 'X-Content-Type-Options'].includes(key)
-            )
-          )
-        }
-      }
-    )
-  }
-
-  // Suspicious request detection
-  const suspiciousPatterns = [
-    /\.\./g, // Path traversal
-    /<script/i, // XSS attempt
-    /javascript:/i, // JavaScript protocol
-    /vbscript:/i, // VBScript protocol
-    /onload=/i, // Event handlers
-    /onerror=/i,
-    /onclick=/i,
-    /eval\(/i, // Code injection
-    /exec\(/i,
-    /union.*select/i, // SQL injection
-    /drop.*table/i,
-    /insert.*into/i,
-    /delete.*from/i
-  ]
-
-  const url = request.url
-  const isSuspicious = suspiciousPatterns.some(pattern => pattern.test(url))
-  
-  if (isSuspicious) {
-    logSecurityEvent('SUSPICIOUS_REQUEST', request, { 
-      pattern: suspiciousPatterns.find(p => p.test(url))?.toString(),
-      url 
-    })
-    
-    return new NextResponse(
-      JSON.stringify({
-        error: 'Forbidden',
-        message: 'Suspicious request detected.'
-      }),
-      {
-        status: 403,
-        headers: {
-          'Content-Type': 'application/json',
-          ...Object.fromEntries(
-            Object.entries(securityHeaders).filter(([key]) => 
-              ['X-Frame-Options', 'X-Content-Type-Options'].includes(key)
-            )
-          )
-        }
-      }
-    )
-  }
-
-  // Add security headers to response
-  Object.entries(securityHeaders).forEach(([key, value]) => {
-    // Skip Clear-Site-Data for regular requests
-    if (key === 'Clear-Site-Data' && !pathname.includes('/logout')) {
-      return
-    }
-    response.headers.set(key, value)
-  })
-
-  // Add CSRF protection headers
-  response.headers.set('X-CSRF-Protection', '1')
-  response.headers.set('X-Request-ID', crypto.randomUUID())
-
-  // Add cache control for security-sensitive pages
-  if (pathname.includes('/contact') || pathname.includes('/admin')) {
-    response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate, private')
-    response.headers.set('Pragma', 'no-cache')
-    response.headers.set('Expires', '0')
-  }
-
-  // Add security headers for development
-  if (process.env.NODE_ENV === 'development') {
-    response.headers.set('X-Development-Mode', 'true')
-  }
-
-  return response
+  // Temporarily disable all middleware
+  return NextResponse.next()
 }
 
 export const config = {
   matcher: [
-    // Enable internationalization
-    '/(en|es)/:path*',
-    '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.).*)',
+    // Disable all middleware for now
+    '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 }
