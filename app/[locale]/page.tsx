@@ -21,7 +21,6 @@ export default function Home() {
       <div className="py-16 flex items-center justify-center">
         <QuickNavButtons />
       </div>
-      {/* Footer is now rendered globally in RootLayout */}
     </main>
   )
-} 
+}

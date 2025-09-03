@@ -5,4 +5,4 @@ export default function DebugPage() {
       <p>This is a debug page using the internationalized layout.</p>
     </div>
   )
-} 
+}
