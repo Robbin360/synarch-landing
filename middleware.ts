@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-// import createIntlMiddleware from 'next-intl/middleware'
-// import { locales, defaultLocale } from './i18n'
+import createIntlMiddleware from 'next-intl/middleware'
+import { locales, defaultLocale } from './i18n'
 
 // Create the intl middleware
-// const intlMiddleware = createIntlMiddleware({
-//   locales,
-//   defaultLocale,
-//   localePrefix: 'as-needed'
-// })
+const intlMiddleware = createIntlMiddleware({
+  locales,
+  defaultLocale,
+  localePrefix: 'as-needed'
+})
 
 // Security headers configuration
 const securityHeaders = {
@@ -139,13 +139,57 @@ function logSecurityEvent(type: string, request: NextRequest, details?: any) {
 }
 
 export function middleware(request: NextRequest) {
-  // Temporarily disable all middleware
-  return NextResponse.next()
+  const { pathname } = request.nextUrl
+  
+  // Skip middleware for static assets and Next.js internal routes
+  if (
+    pathname.startsWith('/_next/') ||
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/favicon.ico') ||
+    pathname.startsWith('/robots.txt') ||
+    pathname.startsWith('/sitemap.xml') ||
+    pathname.startsWith('/og-image.jpg') ||
+    pathname.startsWith('/twitter-image.jpg') ||
+    pathname.startsWith('/capability-brief.pdf') ||
+    pathname.startsWith('/_not-found') ||
+    pathname.startsWith('/_error')
+  ) {
+    return NextResponse.next()
+  }
+
+  // First handle internationalization
+  const intlResponse = intlMiddleware(request)
+  
+  // Add security headers to the response
+  Object.entries(securityHeaders).forEach(([key, value]) => {
+    intlResponse.headers.set(key, value)
+  })
+
+  // Rate limiting
+  const ip = request.headers.get('x-forwarded-for') || 
+           request.headers.get('x-real-ip') || 
+           request.headers.get('cf-connecting-ip') || 
+           'unknown'
+  
+  if (!rateLimit(ip)) {
+    logSecurityEvent('rate_limit_exceeded', request, { ip })
+    return new NextResponse('Too Many Requests', { status: 429 })
+  }
+
+  // Bot detection and logging
+  const userAgent = request.headers.get('user-agent') || ''
+  if (isBot(userAgent)) {
+    logSecurityEvent('bot_detected', request, { userAgent })
+  }
+
+  return intlResponse
 }
 
 export const config = {
   matcher: [
-    // Disable all middleware for now
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    // Enable internationalization for locale routes
+    '/(en|es)/:path*',
+    // Enable middleware for other routes but exclude static assets
+    '/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|og-image.jpg|twitter-image.jpg|capability-brief.pdf|.*\\.).*)',
   ],
 }
