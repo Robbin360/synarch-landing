@@ -48,5 +48,9 @@
       "title": "Compromiso",
       "content": "Nos comprometemos a construir tecnología que respete los derechos humanos, promueva la igualdad y contribuya a un mundo mejor para las generaciones futuras."
     }
+  },
+  "AccessibilitySkipLinks": {
+    "skipToContent": "Saltar al contenido principal",
+    "skipToNavigation": "Saltar a la navegación"
   }
 }

@@ -48,5 +48,9 @@
       "title": "Commitment",
       "content": "We commit to building technology that respects human rights, promotes equality, and contributes to a better world for future generations."
     }
+  },
+  "AccessibilitySkipLinks": {
+    "skipToContent": "Skip to main content",
+    "skipToNavigation": "Skip to navigation"
   }
 }
