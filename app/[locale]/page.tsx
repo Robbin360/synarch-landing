@@ -1,18 +1,21 @@
+import type { NextPage } from 'next';
 import LuxuryHero from "@/components/LuxuryHero";
 import ThesisSection from "@/components/ThesisSection";
 import StructureSection from "@/components/StructureSection";
+import PrinciplesSection from "@/components/PrinciplesSection";
 import Thesis from "@/components/Thesis";
 import Entities from "@/components/Entities";
 import Contact from "@/components/Contact";
 import Reveal from "@/components/Reveal";
 import QuickNavButtons from "@/components/QuickNavButtons";
 
-export default async function HomePage() {
+const Home: NextPage = () => {
   return (
     <main className="min-h-screen">
       <LuxuryHero />
       <ThesisSection />
       <StructureSection />
+      <PrinciplesSection />
       <Reveal>
         <Thesis />
       </Reveal>
@@ -28,3 +31,5 @@ export default async function HomePage() {
     </main>
   );
 }
+
+export default Home;
