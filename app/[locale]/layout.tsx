@@ -38,6 +38,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
+        <meta charSet="utf-8" />
         {/* Performance hints */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
