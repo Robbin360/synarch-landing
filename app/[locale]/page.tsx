@@ -3,6 +3,7 @@ import LuxuryHero from "@/components/LuxuryHero";
 import ThesisSection from "@/components/ThesisSection";
 import StructureSection from "@/components/StructureSection";
 import PrinciplesSection from "@/components/PrinciplesSection";
+import ContactSection from "@/components/ContactSection";
 import Thesis from "@/components/Thesis";
 import Entities from "@/components/Entities";
 import Contact from "@/components/Contact";
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
       <ThesisSection />
       <StructureSection />
       <PrinciplesSection />
+      <ContactSection />
       <Reveal>
         <Thesis />
       </Reveal>
