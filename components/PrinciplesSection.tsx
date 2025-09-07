@@ -4,19 +4,19 @@ import React from 'react';
 const PrinciplesSection = () => {
   const principles = [
     {
-      name: "Maquiavelo",
-      subtitle: "El Arquitecto del Poder Realista",
-      quote: "«Es más seguro ser temido que amado. El fin justifica los medios.»"
+      name: "Machiavelli",
+      subtitle: "The Architect of Realist Power",
+      quote: "\"It is better to be feared than loved. The end justifies the means.\""
     },
     {
       name: "Sun Tzu",
-      subtitle: "El Maestro de la Estrategia Indirecta",
-      quote: "«El supremo arte de la guerra es someter al enemigo sin luchar.»"
+      subtitle: "The Master of Indirect Strategy",
+      quote: "\"Supreme excellence consists in breaking the enemy's resistance without fighting.\""
     },
     {
       name: "Clausewitz",
-      subtitle: "El Filósofo de la Voluntad y la Fricción",
-      quote: "«La guerra es la continuación de la política por otros medios.»"
+      subtitle: "The Philosopher of Will and Friction",
+      quote: "\"War is merely the continuation of politics by other means.\""
     }
   ];
 
@@ -25,10 +25,10 @@ const PrinciplesSection = () => {
       <div className="px-6 mx-auto max-w-7xl lg:px-8">
         <div className="text-center">
           <h2 className="text-4xl font-bold tracking-tight text-white font-playfair sm:text-5xl">
-            Construido sobre los Hombros de Gigantes.
+            Built on the Shoulders of Giants
           </h2>
           <p className="max-w-3xl mx-auto mt-6 text-lg leading-8 text-gray-300 font-inter">
-            Nuestra doctrina no nace del vacío. Es la síntesis de siglos de pensamiento estratégico, destilada en un sistema operativo para el poder en el siglo XXI.
+            Our doctrine does not emerge from a vacuum. It is the synthesis of centuries of strategic thought, distilled into an operating system for power in the 21st century.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 mt-16 sm:mt-20 md:grid-cols-3">
