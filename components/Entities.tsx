@@ -2,8 +2,8 @@
 
 import { motion, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
-import LuxuryContainer from '@/components/LuxuryContainer'
-import LuxuryGrid from '@/components/LuxuryGrid'
+import Container from '@/components/Container'
+import Grid from '@/components/Grid'
 import ScrollNarrative from '@/components/ScrollNarrative'
 import { ParallaxLayer } from '@/components/ParallaxEffects'
 import AnimatedButton from '@/components/AnimatedButton'

@@ -1,22 +1,22 @@
-import type { NextPage } from 'next';
-import AnimatedHero from "@/components/AnimatedHero";
-import StatsSection from "@/components/StatsSection";
-import ServicesSection from "@/components/ServicesSection";
-import ContactSection from "@/components/ContactSection";
-import QuickNavButtons from "@/components/QuickNavButtons";
+import type { Metadata } from 'next';
+import MainLayout from '@/components/MainLayout';
+import HeroSection from '@/components/HeroSection';
+import StatsSection from '@/components/StatsSection';
+import ServicesSection from '@/components/ServicesSection';
+import ContactSection from '@/components/ContactSection';
 
-const Home: NextPage = () => {
+export const metadata: Metadata = {
+  title: 'Synarch | Empowering Brands to Inspire People',
+  description: 'Creamos experiencias digitales que encienden pasiones y reinventan lo posible.',
+};
+
+export default function HomePage() {
   return (
-    <main className="min-h-screen">
-      <AnimatedHero />
+    <MainLayout>
+      <HeroSection />
       <StatsSection />
       <ServicesSection />
       <ContactSection />
-      <div className="py-16 flex items-center justify-center">
-        <QuickNavButtons />
-      </div>
-    </main>
+    </MainLayout>
   );
 }
-
-export default Home;

@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
-import LuxuryContainer from '@/components/LuxuryContainer'
+import Container from '@/components/Container'
 import ScrollNarrative from '@/components/ScrollNarrative'
 import { ParallaxLayer } from '@/components/ParallaxEffects'
 import AnimatedButton from '@/components/AnimatedButton'
@@ -39,7 +39,7 @@ export default function Thesis() {
   }
 
   return (
-    <LuxuryContainer variant="section" className="narrative-section luxury-reveal">
+    <Container className="narrative-section">
       <ScrollNarrative>
         <div ref={containerRef} className="max-w-6xl mx-auto text-center">
           {/* Background Elements */}
