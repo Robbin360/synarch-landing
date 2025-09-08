@@ -6,56 +6,59 @@ import { useRef } from 'react';
 export default function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const scale = useTransform(scrollY, [0, 500], [1, 0.9]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <div ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Fondo con efecto parallax */}
+    <div className="relative min-h-[100svh] flex flex-col items-center justify-center">
       <motion.div
+        ref={ref}
         className="absolute inset-0 z-0"
         style={{
+          backgroundImage: `url('/_next/static/media/hero-bg.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           y,
-          opacity,
-          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8))',
+          scale
         }}
       />
 
-      {/* Contenido principal */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8"
-        >
-          We empower brands to inspire people
-        </motion.h1>
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black"
+        style={{ opacity }}
+      />
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto"
-        >
-          Creamos experiencias que encienden pasiones, reinventando lo posible
-        </motion.p>
-
+      <div className="relative z-10 container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="flex flex-col items-center text-center"
+          initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 1 }}
         >
-          <button
-            className="px-8 py-4 bg-white text-black rounded-full text-lg font-medium hover:bg-opacity-90 transition-all transform hover:scale-105"
+          <h1 className="text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] font-bold leading-tight mb-8">
+            <div>We empower brands</div>
+            <div>to inspire people</div>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mb-12">
+            Creamos experiencias que encienden pasiones, reinventando lo posible
+          </p>
+
+          <motion.button
+            className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-medium tracking-wide text-black bg-white rounded-full overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            EXPLORÁ NUESTRO UNIVERSO
-          </button>
+            <span className="relative z-10">EXPLORÁ NUESTRO UNIVERSO</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-gray-100 to-white transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
+          </motion.button>
         </motion.div>
       </div>
 
-      {/* Degradado inferior */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"
+        style={{ opacity }}
     </div>
   );
 }

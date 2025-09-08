@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Link from 'next/link';
 
 interface ServiceCardProps {
   title: string;
@@ -32,20 +33,28 @@ function ServiceCard({ title, description, index }: ServiceCardProps) {
 export default function ServicesSection() {
   const services = [
     {
-      title: 'Branding',
-      description: 'Diseñamos identidades que crecen, se adaptan y se destacan, creando experiencias que conectan y expresan lo que hace única a cada marca.',
+      title: 'BRANDING',
+      subtitle: 'CREAMOS LA IDENTIDAD',
+      description: 'En un mundo digital que no para de cambiar, ayudamos a las marcas a descubrir su esencia. Diseñamos identidades que crecen, se adaptan y se destacan, creando experiencias que conectan y expresan lo que las hace únicas.',
+      href: '/services/branding'
     },
     {
-      title: 'Digital',
-      description: 'Creamos sitios web, apps y plataformas a medida que ayudan a las marcas a generar impacto global y conectar de forma auténtica.',
+      title: 'DIGITAL',
+      subtitle: 'DISEÑAMOS LA EXPERIENCIA',
+      description: 'Creamos sitios web, apps, plataformas a medida y e-commerce que ayudan a las marcas a generar impacto global y conectar de forma auténtica con su audiencia.',
+      href: '/services/digital'
     },
     {
-      title: 'Labs',
-      description: 'Diseñamos las experiencias del mañana — pensadas para conectar, emocionar y lograr resultados excepcionales en cada interacción.',
+      title: 'LABS',
+      subtitle: 'CONTAMOS LA HISTORIA',
+      description: 'Diseñamos las experiencias del mañana — pensadas para conectar, emocionar y lograr resultados excepcionales que dejan una marca en cada interacción.',
+      href: '/services/labs'
     },
     {
-      title: 'Boost',
-      description: 'Elevamos marcas para que se mantengan relevantes, únicas y siempre un paso adelante, potenciando lo que son y lo que pueden llegar a ser.',
+      title: 'BOOST',
+      subtitle: 'ACOMPAÑAMOS LA EVOLUCIÓN',
+      description: 'Elevamos marcas para que se mantengan relevantes, únicas y siempre un paso adelante. Acompañamos su evolución, potenciando lo que son y proyectando lo que pueden llegar a ser.',
+      href: '/services/boost'
     },
   ];
 
@@ -69,16 +78,56 @@ export default function ServicesSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              title={service.title}
-              description={service.description}
-              index={index}
-            />
-          ))}
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+        {services.map((service, index) => (
+          <motion.div
+            key={index}
+            className="relative group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            viewport={{ once: true }}
+          >
+            <Link href={service.href} className="block">
+              <div className="overflow-hidden rounded-lg aspect-[16/9] mb-8">
+                <motion.div
+                  className="w-full h-full bg-zinc-900"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.6 }}
+                />
+              </div>
+              
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2 text-sm text-gray-400">
+                  <span>{service.subtitle}</span>
+                  <span>/</span>
+                </div>
+                
+                <h3 className="text-2xl font-bold tracking-tight">{service.title}</h3>
+                
+                <p className="text-gray-400 leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="mt-16 text-center">
+        <Link
+          href="/services"
+          className="inline-flex items-center space-x-2 text-lg hover:text-gray-300 transition-colors"
+        >
+          <span>CONOCÉ TODOS NUESTROS SERVICIOS</span>
+          <motion.span
+            animate={{ x: [0, 5, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            →
+          </motion.span>
+        </Link>
+      </div>
       </div>
     </section>
   );
